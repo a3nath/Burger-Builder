@@ -1,19 +1,18 @@
 import React from 'react';
 
-import classes from './SaladControl.module.css'
-import SaladControl from './SaladControl/SaladControl';
+import classes from './BurgerControl.module.css'
+import BurgerControl from './BurgerControl/BurgerControl';
 
 
-const saladControls = (props) => {
+const burgerControls = (props) => {
     return(
         Object.keys(props.ingredients).map((ing,key) => {
-
             return(
                 <div key={key} className={classes.Control}>
-                    <SaladControl 
+                    <BurgerControl 
                         ing={ing} 
                         added={() => props.addControl(ing)} 
-                        remove = {() => this.removeControl(ing)}
+                        remove = {() => props.removeControl(ing)}
                         disab = {(props.ingredients[ing] < 1 ? true : false)}
                     />
                 </div>
@@ -24,4 +23,4 @@ const saladControls = (props) => {
 
 
 
-export default saladControls;
+export default burgerControls;

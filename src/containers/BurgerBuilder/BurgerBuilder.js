@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import Aux from '../../hoc/Aux';
-import Salad from '../../components/Salad/Salad';
-import SaladControls from '../../components/SaladControls/SaladControls';
+import Burger from '../../components/Burger/Burger';
+import BurgerControls from '../../components/BurgerControls/BurgerControls';
 
 const INGREDIENT_COST = {
     lettuce: 1,
@@ -11,19 +11,15 @@ const INGREDIENT_COST = {
     meat: 3
 }
 
-class SaladBuilder extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {...}
-    // }
+class BurgerBuilder extends Component {
     state = {
         ingredients: {
             lettuce: 1,
-            tomato: 0,
-            cheese: 2,
-            meat: 0
+            tomato: 1,
+            cheese: 1,
+            meat: 1
         },
-        total: 5
+        total: 7
     }
 
     addIng = (type) => {
@@ -49,24 +45,16 @@ class SaladBuilder extends Component {
     }
 
     render () {
-        // const controlArr = Object.keys(this.state.ingredients).map((ing, key) => {
-        //     return ( 
-        //         <div key={key}>
-        //             <p>{ing}</p>
-        //             <SaladControls addControl={(ing) => this.addIng(ing)} removeControl={(ing) => this.removeIng(ing)}/>
-        //         </div>)
-        // })
-
-        // console.log(controlArr)
         console.log(this.state.total)
 
         return (
             <Aux>
-                <Salad ingredients={this.state.ingredients} />
-                <SaladControls ingredients={this.state.ingredients} addControl={this.addIng} removeControl = {this.removeIng} />
+                <Burger ingredients={this.state.ingredients} />
+                <p>Total Price: {this.state.total}</p>
+                <BurgerControls ingredients={this.state.ingredients} addControl={this.addIng} removeControl = {this.removeIng} />
             </Aux>
         );
     }
 };
 
-export default SaladBuilder;
+export default BurgerBuilder;

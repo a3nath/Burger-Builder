@@ -2,14 +2,14 @@ import React from 'react';
 
 import Aux from '../../../hoc/Aux';
 
-const saladControl = (props) => {
+const burgerControl = (props) => {
     return(
-        <div>
+        <Aux>
             <p>{props.ing}</p>
             <button onClick={props.added}>Add Ingredient</button>
             <button onClick={props.remove} disabled={props.disab}>Remove Ingrdient</button>
-        </div>
+        </Aux>
     )
 };
 
-export default saladControl;
+export default burgerControl;
