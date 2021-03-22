@@ -1,14 +1,25 @@
 import React from 'react';
 
+import classes from './SaladControl.module.css'
+import SaladControl from './SaladControl/SaladControl';
+
+
 const saladControls = (props) => {
     return(
-        <div>
-            <button onClick={props.addControl}>Add Ingredient</button>
-            <button onClick={props.removeControl}>Remove Ingredient</button>
-        </div>
-    )
+        Object.keys(props.ingredients).map((ing,key) => {
 
-}
+            return(
+                <div key={key} className={classes.Control}>
+                    <SaladControl 
+                        ing={ing} 
+                        added={() => props.addControl(ing)} 
+                        remove = {() => this.removeControl(ing)}
+                        disab = {(props.ingredients[ing] < 1 ? true : false)}
+                    />
+                </div>
+            )
+        })
+)};
 
 
 
