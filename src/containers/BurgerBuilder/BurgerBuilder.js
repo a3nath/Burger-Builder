@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/BurgerControls/BurgerControls';
+
 import Modal from '../../components/UI/Modal/Modal';
 
 
@@ -51,6 +52,14 @@ class BurgerBuilder extends Component {
         this.setState({modal:true})
     }
 
+    modalCloseHandler = () => {
+        this.setState({modal:false})
+    }
+
+    purchaseHandler =() => {
+        alert('Lets purchase baby!')
+    }
+
     render () {
         console.log(this.state.total)
 
@@ -62,9 +71,15 @@ class BurgerBuilder extends Component {
                     addControl={this.addIng} 
                     removeControl = {this.removeIng}
                     price={this.state.total} 
-                    order={this.modalHandler}
+                    modal={this.modalHandler}
                 />
-                <Modal ingredients={this.state.ingredients}  price={this.state.total} modalShow={this.state.modal}/>
+                <Modal 
+                    ingredients={this.state.ingredients}  
+                    price={this.state.total} 
+                    modalShow={this.state.modal}
+                    modalClose={this.modalCloseHandler}
+                    purchase={this.purchaseHandler}
+                />
             </Aux>
         );
     }

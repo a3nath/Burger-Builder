@@ -22,7 +22,7 @@ const burgerControls = (props) => {
                 )
             })
         }
-            <Order clicked={props.modalHandler} price={props.price}/>
+            <Order clicked={props.modal} price={props.price}/>
         </div>
 )};
 
