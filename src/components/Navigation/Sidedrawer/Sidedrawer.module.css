@@ -1,0 +1,34 @@
+.Sidedrawer{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:200;
+    width:280px;
+    max-width: 70%;
+    height:100%;
+    background-color: cornsilk;
+    box-sizing: border-box;
+    padding:32px 16px;
+    transition: transform 0.3s ease-in;
+};
+
+.Logo{
+    height:10%;
+};
+
+/* 
+Dont show for screens greater than 500px width */
+
+@media (min-width: 500px) {
+    .Sidedrawer {
+        display: none; 
+    }
+};
+
+.Open{
+    transform: translateX(0)
+}
+
+.Close{
+    transform: translateX(-100%);
+}
