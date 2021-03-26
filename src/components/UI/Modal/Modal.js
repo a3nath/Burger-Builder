@@ -8,7 +8,7 @@ import Button from '../Button/Button'
 const modal = (props) => {
     const ingArr = Object.keys(props.ingredients).map((ing, key) => {
         return (
-            <li>{ing.toUpperCase()}: {props.ingredients[ing]}</li>
+            <li key={key}>{ing.toUpperCase()}: {props.ingredients[ing]}</li>
         )       
     })
     return(

@@ -17,10 +17,11 @@
 };
 
 /* 
-Dont show for screens greater than 500px width */
+Dont show for screens greater than 500px width 
+*/
 
 @media (min-width: 500px) {
-    .Sidedrawer {
+    .Sidedrawer{
         display: none; 
     }
 };
