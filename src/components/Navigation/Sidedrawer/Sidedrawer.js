@@ -8,17 +8,17 @@ import Aux from '../../../hoc/Aux'
 
 const sidedrawer = (props) => {
 
-    let DrawerClass = [classes.Drawer, classes.Close]
+    let DrawerClass = [classes.Sidedrawer, classes.Close]
 
-    if (props.open) {
-        DrawerClass = [classes.Drawer, classes.Open]
+    if (props.show) {
+        DrawerClass = [classes.Sidedrawer, classes.Open]
     }
 
     return (
         <Aux>
-            <Backdrop onClick={props.click} Backdropshow={props.open}/>
+            <Backdrop BackdropClicked={props.clicked} Backdropshow={props.show}/>
             <div className={DrawerClass.join(' ')}>
-                <div className={classes.Logo}>
+                <div className={classes.Logo} style={{'height': '11%'}}>
                     <Logo/>
                 </div>
                 <nav>

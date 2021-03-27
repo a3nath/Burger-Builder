@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-    color:#fff;
+    color:#000;
     flex-flow:column;
 }
 
@@ -13,5 +13,6 @@
     .NavigationItems{
         display: flex;
         flex-flow: row;
+        color:#fff;
     }
 }
