@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import classes from './Modal.module.css';
 import Aux from '../../../hoc/Aux';
@@ -11,6 +11,8 @@ const modal = (props) => {
             <li key={key}>{ing.toUpperCase()}: {props.ingredients[ing]}</li>
         )       
     })
+
+
     return(
         <Aux>
             <Backdrop show={props.modalShow} clicked={props.modalClose}/>
