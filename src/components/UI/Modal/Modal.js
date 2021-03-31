@@ -3,14 +3,11 @@ import React, { Component } from 'react';
 import classes from './Modal.module.css';
 import Aux from '../../../hoc/Aux';
 import Backdrop from '../Backdrop/Backdrop';
-import Button from '../Button/Button'
+import Button from '../Button/Button';
+import OrderSummary from '../../Order/OrderSummary';
 
 const modal = (props) => {
-    const ingArr = Object.keys(props.ingredients).map((ing, key) => {
-        return (
-            <li key={key}>{ing.toUpperCase()}: {props.ingredients[ing]}</li>
-        )       
-    })
+    
 
 
     return(
@@ -21,15 +18,7 @@ const modal = (props) => {
                 transform: props.modalShow ? 'translateY(0)' : 'translateY(-100vh)',
                 opacity: props.modalShow ? '1' : '0'
             }}>
-                <h2>Your Amazing burger is readdy!</h2>
-                <p>The ingredients are:</p>
-                <ul>
-                    {ingArr}
-                </ul>
-                <p>Price: {props.price}</p>
-                <Button clicked={props.purchase} BtnType='Success'>Contine</Button>
-                <Button clicked={props.modalClose} BtnType='Danger'>Cancel</Button>
-
+                <OrderSummary purchaseClick={props.purchase} cancelClick={props.modalClose} total={props.price} ingredientsArr={props.ingredients}/>
             </div>
 
         </Aux>
