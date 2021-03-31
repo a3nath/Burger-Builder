@@ -71,7 +71,7 @@ class BurgerBuilder extends Component {
                 country: 'Canada'
             }
         }
-        axios.post('/orders', order)
+        axios.post('/ordersson', order)
             .then(response => {
                 this.setState({loading:false, modal:false})
             })
