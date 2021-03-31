@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
 
 import classes from './Modal.module.css';
-import Aux from '../../../hoc/Aux';
+import Aux from '../../../hoc/Aux/Aux';
 import Backdrop from '../Backdrop/Backdrop';
-import Button from '../Button/Button';
-import OrderSummary from '../../Order/OrderSummary';
 
-const modal = (props) => {
+
+
+class Modal extends Component{
+
     
+    render(){
+
+        return(
+            <Aux>
+                <Backdrop show={this.props.modalShow} clicked={this.props.modalClose}/>
+                <div className={classes.Modal} 
+                    style={{ 
+                    transform: this.props.modalShow ? 'translateY(0)' : 'translateY(-100vh)',
+                    opacity: this.props.modalShow ? '1' : '0'
+                }}>
+                    {this.props.children}
+                </div>
+            </Aux>
+        )
+    }
+
+} 
 
 
-    return(
-        <Aux>
-            <Backdrop show={props.modalShow} clicked={props.modalClose}/>
-            <div className={classes.Modal} 
-            style={{
-                transform: props.modalShow ? 'translateY(0)' : 'translateY(-100vh)',
-                opacity: props.modalShow ? '1' : '0'
-            }}>
-                <OrderSummary purchaseClick={props.purchase} cancelClick={props.modalClose} total={props.price} ingredientsArr={props.ingredients}/>
-            </div>
 
-        </Aux>
-        
-    )
-}
-
-export default modal;
+export default Modal;
