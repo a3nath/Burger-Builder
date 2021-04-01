@@ -19,12 +19,7 @@ const INGREDIENT_COST = {
 
 class BurgerBuilder extends Component {
     state = {
-        ingredients: {
-            lettuce: 1,
-            tomato: 1,
-            cheese: 1,
-            meat: 1
-        },
+        ingredients: null,
         total: 7,
         modal:false,
         loading: false
@@ -71,33 +66,57 @@ class BurgerBuilder extends Component {
                 country: 'Canada'
             }
         }
-        axios.post('/ordersson', order)
+        axios.post('/orders.json', order)
             .then(response => {
                 this.setState({loading:false, modal:false})
             })
             .catch(error => {
-                this.setState({loading: false, modal:false})
+                this.setState({loading: false, modal:false}) 
             })
     }
 
+    componentDidMount(){
+        axios.get('https://academindburger-default-rtdb.firebaseio.com/ingredients.json')
+            .then(response => {
+                this.setState({ingredients: response.data})
+            })
+            .catch(err => { console.log(err)})
+    }
+
+
     render () {
-        let orderSummary = <OrderSummary purchaseClick={this.purchaseHandler} cancelClick={this.modalCloseHandler} price={this.state.total} ingredients={this.state.ingredients}/>
+
+        let burgerMenu = <Spinner/>
+        let orderSummary = null
+
+        if (this.state.ingredients){
+            burgerMenu = 
+                <Aux>
+                    <Burger ingredients={this.state.ingredients} />
+                    <BurgerControls 
+                        ingredients={this.state.ingredients} 
+                        addControl={this.addIng} 
+                        removeControl = {this.removeIng}
+                        price={this.state.total} 
+                        modal={this.modalHandler}
+                    />
+                </Aux>
+            orderSummary = 
+                <OrderSummary 
+                            purchaseClick={this.purchaseHandler} 
+                            cancelClick={this.modalCloseHandler} 
+                            price={this.state.total} 
+                            ingredients={this.state.ingredients}
+                />
+        }
 
         if (this.props.loading){
             orderSummary = <Spinner/>
         }
 
-
         return (
             <Aux>
-                <Burger ingredients={this.state.ingredients} />
-                <BurgerControls 
-                    ingredients={this.state.ingredients} 
-                    addControl={this.addIng} 
-                    removeControl = {this.removeIng}
-                    price={this.state.total} 
-                    modal={this.modalHandler}
-                />
+                {burgerMenu}
                 <Modal 
                     modalShow={this.state.modal}
                     modalClose={this.modalCloseHandler}
@@ -106,6 +125,7 @@ class BurgerBuilder extends Component {
                     {orderSummary}
                 </Modal>
             </Aux>
+            
         );
     }
 };
