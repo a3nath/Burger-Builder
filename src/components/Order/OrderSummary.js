@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Aux from '../../hoc/Aux/Aux'
 import Button from '../UI/Button/Button'
 
@@ -17,7 +18,7 @@ const orderSummary = (props) => {
                 {ingArr}
             </ul>
             <p>Price: {props.price}</p>
-            <Button clicked={props.purchaseClick} BtnType='Success'>Contine</Button>
+                <Button clicked={props.purchaseClick} BtnType='Success'>Contine</Button>
             <Button clicked={props.cancelClick} BtnType='Danger'>Cancel</Button>
         </Aux>
     )

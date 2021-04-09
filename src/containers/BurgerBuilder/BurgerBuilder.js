@@ -8,6 +8,7 @@ import axios from '../../axios-orders';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import CheckoutBuilder from '../CheckoutBuilder/CheckoutBuilder';
 
 
 const INGREDIENT_COST = {
@@ -88,6 +89,7 @@ class BurgerBuilder extends Component {
 
         let burgerMenu = <Spinner/>
         let orderSummary = null
+        let checkoutBuilder = null;
 
         if (this.state.ingredients){
             burgerMenu = 
@@ -103,11 +105,19 @@ class BurgerBuilder extends Component {
                 </Aux>
             orderSummary = 
                 <OrderSummary 
-                            purchaseClick={this.purchaseHandler} 
-                            cancelClick={this.modalCloseHandler} 
-                            price={this.state.total} 
-                            ingredients={this.state.ingredients}
+                    purchaseClick={this.purchaseHandler} 
+                    cancelClick={this.modalCloseHandler} 
+                    price={this.state.total} 
+                    ingredients={this.state.ingredients}
                 />
+            checkoutBuilder = 
+                <CheckoutBuilder 
+                    purchaseClick={this.purchaseHandler} 
+                    cancelClick={this.modalCloseHandler} 
+                    price={this.state.total} 
+                    ingredients={this.state.ingredients}
+                />
+        
         }
 
         if (this.props.loading){
@@ -117,6 +127,7 @@ class BurgerBuilder extends Component {
         return (
             <Aux>
                 {burgerMenu}
+
                 <Modal 
                     modalShow={this.state.modal}
                     modalClose={this.modalCloseHandler}
