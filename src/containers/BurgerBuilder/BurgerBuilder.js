@@ -8,7 +8,7 @@ import axios from '../../axios-orders';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import CheckoutBuilder from '../CheckoutBuilder/CheckoutBuilder';
+import { Link } from 'react-router-dom';
 
 
 const INGREDIENT_COST = {
@@ -57,23 +57,23 @@ class BurgerBuilder extends Component {
     }
 
     purchaseHandler =() => {
-        this.setState({loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.total,
-            customer: {
-                name: 'Aaa',
-                contact: '519519519',
-                country: 'Canada'
-            }
-        }
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({loading:false, modal:false})
-            })
-            .catch(error => {
-                this.setState({loading: false, modal:false}) 
-            })
+        // this.setState({loading: true, modal:false})
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.total,
+        //     customer: {
+        //         name: 'Aaa',
+        //         contact: '519519519',
+        //         country: 'Canada'
+        //     }
+        // }
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //         this.setState({loading:false, modal:false})
+        //     })
+        //     .catch(error => {
+        //         this.setState({loading: false, modal:false}) 
+        //     })
     }
 
     componentDidMount(){
@@ -89,7 +89,6 @@ class BurgerBuilder extends Component {
 
         let burgerMenu = <Spinner/>
         let orderSummary = null
-        let checkoutBuilder = null;
 
         if (this.state.ingredients){
             burgerMenu = 
@@ -109,15 +108,7 @@ class BurgerBuilder extends Component {
                     cancelClick={this.modalCloseHandler} 
                     price={this.state.total} 
                     ingredients={this.state.ingredients}
-                />
-            checkoutBuilder = 
-                <CheckoutBuilder 
-                    purchaseClick={this.purchaseHandler} 
-                    cancelClick={this.modalCloseHandler} 
-                    price={this.state.total} 
-                    ingredients={this.state.ingredients}
-                />
-        
+                /> 
         }
 
         if (this.props.loading){
