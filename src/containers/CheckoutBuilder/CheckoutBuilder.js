@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import { Route } from 'react-router-dom';
 
 import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
+import ContactData from '../CheckoutBuilder/ContactData/ContactData';
 
 class CheckoutBuilder extends Component {
     state={
@@ -25,17 +27,33 @@ class CheckoutBuilder extends Component {
         this.setState({ingredients: newIng, price:total})
     }
 
-    navigateBack = () => {
+    checkoutCancel = () => {
         this.props.history.goBack()
     }
+
+    checkoutContinue = () => {
+        this.props.history.replace('/checkout/contactdata')
+    }
+
+
 
     render(){
         console.log(this.props)
 
         return( 
-            <CheckoutSummary ingredients={this.state.ingredients} price={this.state.price} click={this.navigateBack}/>
+            <div>
+                <CheckoutSummary 
+                    ingredients={this.state.ingredients} 
+                    clickedCancel={this.checkoutCancel} 
+                    clickedSuccess={this.checkoutContinue}/>
+                <Route path={`${this.props.match.url}/contactdata`} render={() => <ContactData 
+                        ingredients={this.state.ingredients} 
+                        price={this.state.price}/> }/>
+            </div>
+
         )
     }
 } 
+
 
 export default CheckoutBuilder;
