@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import Burger from '../../components/Burger/Burger';
-import Button from '../../components/UI/Button/Button'
-import classes from './CheckoutBuilder.module.css'
-import ContactData from '../CheckoutBuilder/ContactData/ContactData'
-import { Link, Route } from 'react-router-dom';
+
+import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 
 class CheckoutBuilder extends Component {
     state={
@@ -36,17 +33,7 @@ class CheckoutBuilder extends Component {
         console.log(this.props)
 
         return( 
-            <div className={classes.CheckoutBuilder}>
-               <h1>Ummm, enjoy your burger!</h1>
-                <div style={{width:'300px', height:'500px', margin:'auto'}}>
-                    <Burger ingredients={this.state.ingredients}/>   
-               </div>
-                <Button BtnType='Danger' clicked={this.navigateBack}>Cancel</Button>
-                <Link to={`${this.props.match.url}/contactdata`}>
-                    <Button BtnType='Success' clicked>Continue</Button>
-                </Link>
-                <Route path={`${this.props.match.path}/contactdata`} render={() => <ContactData ingredients={this.state.ingredients} price={this.state.price}/> }/>
-           </div>
+            <CheckoutSummary ingredients={this.state.ingredients} price={this.state.price} click={this.navigateBack}/>
         )
     }
 } 

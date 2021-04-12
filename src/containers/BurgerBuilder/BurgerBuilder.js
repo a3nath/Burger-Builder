@@ -8,7 +8,6 @@ import axios from '../../axios-orders';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import { Link } from 'react-router-dom';
 
 
 const INGREDIENT_COST = {
