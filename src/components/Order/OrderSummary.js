@@ -19,6 +19,8 @@ const orderSummary = (props) => {
         ingStr = ingStr + `${ing}=${props.ingredients[ing]}&`
     }
 
+    ingStr = ingStr + `price=${props.price}`
+
     return(
         <Aux>
             <h2>Your Amazing burger is readdy!</h2>

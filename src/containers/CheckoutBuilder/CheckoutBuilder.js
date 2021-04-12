@@ -5,36 +5,32 @@ import classes from './CheckoutBuilder.module.css'
 import ContactData from '../CheckoutBuilder/ContactData/ContactData'
 import { Link, Route } from 'react-router-dom';
 
-
 class CheckoutBuilder extends Component {
     state={
-        ingredients: {
-            lettuce: 1,
-            tomato: 1,
-            meat:1,
-            cheese:1
-        }
+        ingredients: null,
+        price:0
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const newIng = {}
+        let total = 0
         const urlParams =  new URLSearchParams(this.props.location.search)
         const entries = urlParams.entries()
 
         for (const entry of entries){ 
-           
-            newIng[entry[0]] = +entry[1]
+            if(entry[0] === 'price') {
+                total = +entry[1]
+            }
+            else{
+                newIng[entry[0]] = +entry[1]
+            }
         }
-
-        this.setState({ingredients: newIng})
+        this.setState({ingredients: newIng, price:total})
     }
-
-   
 
     navigateBack = () => {
         this.props.history.goBack()
     }
-
 
     render(){
         console.log(this.props)
@@ -49,7 +45,7 @@ class CheckoutBuilder extends Component {
                 <Link to={`${this.props.match.url}/contactdata`}>
                     <Button BtnType='Success' clicked>Continue</Button>
                 </Link>
-                <Route path={`${this.props.match.path}/contactdata`} component={ContactData}/>
+                <Route path={`${this.props.match.path}/contactdata`} render={() => <ContactData ingredients={this.state.ingredients} price={this.state.price}/> }/>
            </div>
         )
     }
