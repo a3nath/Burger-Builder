@@ -46,9 +46,9 @@ class CheckoutBuilder extends Component {
                     ingredients={this.state.ingredients} 
                     clickedCancel={this.checkoutCancel} 
                     clickedSuccess={this.checkoutContinue}/>
-                <Route path={`${this.props.match.url}/contactdata`} render={() => <ContactData 
+                <Route path={`${this.props.match.url}/contactdata`} render={(props) => <ContactData 
                         ingredients={this.state.ingredients} 
-                        price={this.state.price}/> }/>
+                        price={this.state.price} {...props}/> }/>
             </div>
 
         )

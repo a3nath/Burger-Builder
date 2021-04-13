@@ -32,6 +32,7 @@ class ContactData extends Component {
         axios.post('/orders.json', order)
             .then(response => {
                 this.setState({loading:false})
+                this.props.history.push('/')
             })
             .catch(error => {
                 this.setState({loading: false}) 
@@ -41,17 +42,24 @@ class ContactData extends Component {
     }
 
     render(){
-        return(
-            <div className={classes.ContactData}>
-                <h4>Enter Contact data</h4>
-                <form>
+        let form = (
+            <form>
                     <input type='text' className={classes.Input} name='name' placeholder='Your Name'/>
                     <input type='email' name='email' className={classes.Input} placeholder='Your Email'/>
                     <input type='text' name='street' className={classes.Input} placeholder='Your Address'/>
                     <input type='text' name='postal' className={classes.Input} placeholder='Your postal code'/>
                     <Button BtnType='Success' clicked={this.orderHandler}>ORDER</Button>
-                    
                 </form>
+        ); 
+
+        if (this.state.loading == true){
+            form = <Spinner/>
+        }
+
+        return(
+            <div className={classes.ContactData}>
+                <h4>Enter Contact data</h4>
+                {form}
             </div>
         )
     }
