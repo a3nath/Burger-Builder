@@ -30,7 +30,10 @@ class Orders extends Component {
         ))
         console.log(orderArr)
         return(
-            {orderArr})
+            <div>
+                    {orderArr}
+            </div>
+        )
     }
 }
 
