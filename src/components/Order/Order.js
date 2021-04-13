@@ -24,7 +24,6 @@ const order = (props) => {
        >{ing.name} {ing.amount}</span>
        )
     })
-    console.log(ingOutput)
 
     return(
         <div className={classes.Order}>
