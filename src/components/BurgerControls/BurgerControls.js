@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './BurgerControl.module.css'
 import BurgerControl from './BurgerControl/BurgerControl';
-import Order from '../Order/Order';
+import OrderBtn from '../Order/OrderBtn';
 
 
 const burgerControls = (props) => {
@@ -22,7 +22,7 @@ const burgerControls = (props) => {
                 )
             })
         }
-            <Order clicked={props.modal} price={props.price}/>
+            <OrderBtn clicked={props.modal} price={props.price}/>
         </div>
 )};
 

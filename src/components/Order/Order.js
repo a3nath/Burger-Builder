@@ -1,11 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import classes from './Order.module.css';
 
 const order = (props) => {
+
+    const ingArr = []
+
+    for (let ingName in props.ingredients) {
+        ingArr.push({name: ingName, amount: props.ingredients[ingName]})
+    }
+
+   const ingOutput = ingArr.map(ing => {
+       return(
+       <span 
+        key={ing.name}
+        style={{
+            textTransform: 'capitalize',
+            display: 'inline-block',
+            margin: '0 8px',
+            border: 'solid 1px',
+            padding: '2px'
+        }}
+       >{ing.name} {ing.amount}</span>
+       )
+    })
+    console.log(ingOutput)
+
     return(
-            <button onClick={props.clicked} disabled={!props.price > 0} className={classes.OrderButton}>ORDER NOW</button>
-            )
+        <div className={classes.Order}>
+            <p>Ingredients {ingOutput}</p>
+            <p>Price: {props.price}</p>
+        </div>
+
+    )
 }
 
 export default order;
