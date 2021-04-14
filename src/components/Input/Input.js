@@ -12,6 +12,7 @@ const input = (props) => {
                 onChange={props.changed}
                 className={classes.inputElement} 
                 type={props.type}/>
+            break;
         // case('select'):
         //     inputElement = 
         //         <select onChange={props.changed} 
@@ -25,6 +26,7 @@ const input = (props) => {
             onChange={props.changed}
                 className={classes.inputElement} 
             type={props.type}/>
+            break
     }
 
     return(
