@@ -103,7 +103,7 @@ class ContactData extends Component {
                 value ={element.config.value} 
                 placholder={element.config.elementConfig.placeholder} 
                 type={element.config.elementConfig.type}
-                options={element.config.elementConfig.options}
+                elementConfig={element.config.elementConfig}
                 changed={(event) => this.inputHandler(event, element.id)}/>)
         })
 
