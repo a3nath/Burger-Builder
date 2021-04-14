@@ -16,6 +16,7 @@
     background-color: white;
     font: inherit;
     padding: 6px 10px;
+    width: 50%;
 }
 
 .InputElement:focus{

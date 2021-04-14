@@ -5,36 +5,33 @@ import classes from './Input.module.css';
 const input = (props) => {
 
     let inputElement = null;
-    let optionArr = null;
-    if (props.options){
-        optionArr = props.options
-    }
+    console.log(props)
+    console.log(props.placeholder)
 
     switch (props.inputType) {
         case('input'):
             inputElement = <input 
                 onChange={props.changed}
                 className={classes.InputElement} 
-                type={props.type}
-                placeholder={props.placeholder}
-                value={props.value}/>
+                value={props.value}
+                {...props.elementConfig}/>
             break;
         case('select'):
             inputElement = <select 
                     onChange={props.changed} 
                     className={classes.InputElement} 
                     value={props.value}>
-                    {props.elementConfig.options.map(opt => {
+                    {props.elementConfig.options.map(opt => 
                         <option key={opt.value} value={opt.value}>{opt.displayValue}</option>
-                    })}
+                    )}
                 </select> 
+            break;
         default:
             inputElement = <input 
             onChange={props.changed}
             className={classes.InputElement} 
-            type={props.type}
-            placeholder={props.placeholder}
             value={props.value}
+            {...props.elementConfig}
             />
             break
     }

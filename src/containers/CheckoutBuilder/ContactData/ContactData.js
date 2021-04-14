@@ -101,9 +101,8 @@ class ContactData extends Component {
                 inputType= {element.config.elementType} 
                 name={element.id} 
                 value ={element.config.value} 
-                placholder={element.config.elementConfig.placeholder} 
-                type={element.config.elementConfig.type}
                 elementConfig={element.config.elementConfig}
+                placeholder={element.config.elementConfig.placeholder}
                 changed={(event) => this.inputHandler(event, element.id)}/>)
         })
 
