@@ -5,21 +5,24 @@ import classes from './Input.module.css';
 const input = (props) => {
 
     let inputElement = null;
-    console.log(props)
-    console.log(props.placeholder)
+    let validationError = null
+
+    if (props.invalid && props.validation && props.touched){
+    validationError= <p>Please enter valid {props.elementConfig.type} value</p>
+    }
 
     switch (props.inputType) {
         case('input'):
             inputElement = <input 
                 onChange={props.changed}
-                className={classes.InputElement} 
+                className={props.invalid && props.validation && props.touched ? [classes.InputElement, classes.InputInvalid].join(' '): classes.InputElement} 
                 value={props.value}
                 {...props.elementConfig}/>
             break;
         case('select'):
             inputElement = <select 
                     onChange={props.changed} 
-                    className={classes.InputElement} 
+                    className={props.invalid && props.validation && props.touched ? [classes.InputElement, classes.InputInvalid].join(' '): classes.InputElement}
                     value={props.value}>
                     {props.elementConfig.options.map(opt => 
                         <option key={opt.value} value={opt.value}>{opt.displayValue}</option>
@@ -29,7 +32,7 @@ const input = (props) => {
         default:
             inputElement = <input 
             onChange={props.changed}
-            className={classes.InputElement} 
+            className={props.invalid && props.validation && props.touched ? [classes.InputElement, classes.InputInvalid].join(' '): classes.InputElement} 
             value={props.value}
             {...props.elementConfig}
             />
@@ -40,6 +43,7 @@ const input = (props) => {
         <div className={classes.Input}>
             <label className={classes.Label}>{props.name}</label>
             {inputElement}
+            {validationError}
         </div>
     )
 }

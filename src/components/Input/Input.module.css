@@ -24,3 +24,8 @@
     background-color: #ccc;
      
 }
+
+.InputInvalid{
+    border: solid red;
+    background-color: salmon;
+}

@@ -16,7 +16,14 @@ class ContactData extends Component {
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Your Name'
-                }
+                },
+                validation: {
+                    required:true,
+                    MinLen:3,
+                    MaxLen:30
+                },
+                valid:false,
+                touched:false
             },
             email: {
                 value:'',
@@ -24,7 +31,12 @@ class ContactData extends Component {
                 elementConfig: {
                     type: 'email',
                     placeholder: 'Your Email'
-                }
+                },
+                validation: {
+                    required:true
+                },
+                valid:false,
+                touched:false
             },
             streetAddress: {
                 value:'',
@@ -32,7 +44,12 @@ class ContactData extends Component {
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Your Street Address'
-                }
+                },
+                validation: {
+                    required:true
+                },
+                valid:false,
+                touched:false
             },
             postalCode: {
                 value:'',
@@ -40,7 +57,14 @@ class ContactData extends Component {
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Your Postal Code'
-                }
+                },
+                validation: {
+                    required:true,
+                    MinLen:6,
+                    MaxLen:6
+                },
+                valid:false,
+                touched:false
             },
             Delivery:{
                     value:'',
@@ -50,16 +74,37 @@ class ContactData extends Component {
                             {value: 'aa', displayValue: 'aa'},
                             {value: 'bb', displayValue: 'bb'}
                         ]
+                    },
+                    validation: {
+                        required:true,
+                    },
+                    valid:false,
+                    touched:false
                 },
-            }
-        },
+            },
         loading:false
+    }
+
+    validHandler = (value, rules) => {
+        let inputValid = true
+        if (rules.required){
+            inputValid = value.trim().length !== '' && inputValid
+        }
+        if (rules.MaxLen) {
+            inputValid = value.length <= rules.MaxLen && inputValid
+        }
+        if (rules.MinLen) {
+            inputValid = value.length >= rules.MinLen && inputValid
+        }
+        return inputValid
     }
 
     inputHandler = (event, inputElement) => {
         const newForm = {...this.state.contactForm};
         const newInput = {...newForm[inputElement]};
         newInput.value = event.target.value;
+        newInput.valid = this.validHandler(newInput.value, newInput.validation);
+        newInput.touched = true;
         newForm[inputElement] = newInput;
         this.setState({contactForm: newForm});
     }
@@ -102,8 +147,10 @@ class ContactData extends Component {
                 name={element.id} 
                 value ={element.config.value} 
                 elementConfig={element.config.elementConfig}
-                placeholder={element.config.elementConfig.placeholder}
-                changed={(event) => this.inputHandler(event, element.id)}/>)
+                changed={(event) => this.inputHandler(event, element.id)}
+                invalid={!element.config.valid}
+                validation={element.config.validation}
+                touched={element.config.touched}/>)
         })
 
         let form = (
