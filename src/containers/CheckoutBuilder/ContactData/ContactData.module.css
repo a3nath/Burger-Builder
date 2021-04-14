@@ -9,6 +9,11 @@
     display: block;
 }
 
+.Disabled{
+    background-color:#ccc;
+    color:red;
+}
+
 @media (min-width: 600px) {
     .ContactData {
         width: 500px;

@@ -43,12 +43,12 @@ class ContactData extends Component {
                 elementType:'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Your Street Address'
+                    placeholder: 'Your Address'
                 },
                 validation: {
-                    required:true
+                    required:true,
                 },
-                valid:false,
+                valid:true,
                 touched:false
             },
             postalCode: {
@@ -63,32 +63,31 @@ class ContactData extends Component {
                     MinLen:6,
                     MaxLen:6
                 },
-                valid:false,
+                valid:true,
                 touched:false
             },
             Delivery:{
-                    value:'',
+                    value:'speedy',
                     elementType:'select',
                     elementConfig: {
                         options: [
-                            {value: 'aa', displayValue: 'aa'},
-                            {value: 'bb', displayValue: 'bb'}
+                            {value: 'fastest', displayValue: 'speedy'},
+                            {value: 'cheapest', displayValue: 'cheapest'}
                         ]
                     },
-                    validation: {
-                        required:true,
-                    },
+                    validation: {},
                     valid:false,
                     touched:false
                 },
             },
+        formValid:false,
         loading:false
     }
 
     validHandler = (value, rules) => {
         let inputValid = true
         if (rules.required){
-            inputValid = value.trim().length !== '' && inputValid
+            inputValid = value.trim() !== '' && inputValid
         }
         if (rules.MaxLen) {
             inputValid = value.length <= rules.MaxLen && inputValid
@@ -106,7 +105,13 @@ class ContactData extends Component {
         newInput.valid = this.validHandler(newInput.value, newInput.validation);
         newInput.touched = true;
         newForm[inputElement] = newInput;
-        this.setState({contactForm: newForm});
+        let formCheck = true
+        for (let formElement in newForm){
+            formCheck = newForm[formElement].valid && formCheck
+        }
+        
+
+        this.setState({contactForm: newForm, formValid: formCheck})
     }
 
     orderHandler = (event) => {
@@ -153,10 +158,13 @@ class ContactData extends Component {
                 touched={element.config.touched}/>)
         })
 
+        let BtnClass = [classes.Btn]
+
+
         let form = (
             <form onSubmit={this.orderHandler}>
                 {formInput}
-                <Button BtnType='Success'>ORDER</Button>
+                <Button disabled={!this.state.formValid} BtnType='Success'>ORDER</Button>
             </form>
         ); 
 
