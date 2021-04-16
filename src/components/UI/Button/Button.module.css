@@ -16,11 +16,11 @@
 }
 
 .Success {
-    color: #5C9210;
+    color: green;
 }
 
 .Danger {
-    color: #944317;
+    color: salmon;
 }
 
 .Button:disabled{
