@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Aux from '../../hoc/Aux/Aux';
 import Burger from '../../components/Burger/Burger';
@@ -8,14 +9,7 @@ import axios from '../../axios-orders';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-
-
-const INGREDIENT_COST = {
-    lettuce: 1,
-    tomato: 2,
-    cheese: 1,
-    meat: 3
-}
+import * as actionTypes from '../../store/actions';
 
 class BurgerBuilder extends Component {
     state = {
@@ -25,27 +19,27 @@ class BurgerBuilder extends Component {
         loading: false
     }
 
-    addIng = (type) => {
-        let newIng = {...this.state.ingredients}
-        const oldIngCount = newIng[type]
-        const newIngCount = oldIngCount + 1
-        newIng[type] = newIngCount
-        const oldTotal = this.state.total
-        const newTotal = oldTotal + INGREDIENT_COST[type]
+    // addIng = (type) => {
+    //     // let newIng = {...this.state.ingredients}
+    //     // const oldIngCount = newIng[type]
+    //     // const newIngCount = oldIngCount + 1
+    //     // newIng[type] = newIngCount
+    //     // const oldTotal = this.state.total
+    //     // const newTotal = oldTotal + INGREDIENT_COST[type]
 
-        this.setState({ingredients: newIng, total: newTotal})
-    }
+    //     // this.setState({ingredients: newIng, total: newTotal})
+    // }
 
-    removeIng = (type) => {
-        let newIng = {...this.state.ingredients}
-        const oldIngCount = newIng[type]
-        const newIngCount = oldIngCount - 1
-        newIng[type] = newIngCount
-        const oldTotal = this.state.total
-        const newTotal = oldTotal - INGREDIENT_COST[type]
+    // removeIng = (type) => {
+    //     // let newIng = {...this.state.ingredients}
+    //     // const oldIngCount = newIng[type]
+    //     // const newIngCount = oldIngCount - 1
+    //     // newIng[type] = newIngCount
+    //     // const oldTotal = this.state.total
+    //     // const newTotal = oldTotal - INGREDIENT_COST[type]
 
-        this.setState({ingredients: newIng, total:newTotal})
-    }
+    //     this.setState({ingredients: newIng, total:newTotal})
+    // }
 
     modalHandler = () => {
         this.setState({modal:true})
@@ -60,11 +54,11 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount(){
-        axios.get('https://academindburger-default-rtdb.firebaseio.com/ingredients.json')
-            .then(response => {
-                this.setState({ingredients: response.data})
-            })
-            .catch(err => { console.log(err)})
+        // axios.get('https://academindburger-default-rtdb.firebaseio.com/ingredients.json')
+        //     .then(response => {
+        //         this.setState({ingredients: response.data})
+        //     })
+        //     .catch(err => { console.log(err)})
     }
 
 
@@ -73,24 +67,25 @@ class BurgerBuilder extends Component {
         let burgerMenu = <Spinner/>
         let orderSummary = null
 
-        if (this.state.ingredients){
+        if (this.props.ing){
             burgerMenu = 
                 <Aux>
-                    <Burger ingredients={this.state.ingredients} />
+                    <Burger ingredients={this.props.ing} />
                     <BurgerControls 
-                        ingredients={this.state.ingredients} 
-                        addControl={this.addIng} 
-                        removeControl = {this.removeIng}
-                        price={this.state.total} 
+                        ingredients={this.props.ing} 
+                        addControl={this.props.addIng} 
+                        removeControl = {this.props.removeIng}
+                        price={this.props.total} 
                         modal={this.modalHandler}
                     />
+
                 </Aux>
             orderSummary = 
                 <OrderSummary 
                     purchaseClick={this.purchaseHandler} 
                     cancelClick={this.modalCloseHandler} 
-                    price={this.state.total} 
-                    ingredients={this.state.ingredients}
+                    price={this.props.total} 
+                    ingredients={this.props.ing}
                 /> 
         }
 
@@ -113,6 +108,21 @@ class BurgerBuilder extends Component {
             
         );
     }
-};
+}
 
-export default WithErrorHandler(BurgerBuilder, axios);
+const mapStateToProps = state => {
+    return {
+        ing: state.ingredients,
+        total: state.total
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addIng: (ingName) => dispatch({type: actionTypes.ADD_ING, ing:ingName}),
+        removeIng: (ingName) => dispatch({type: actionTypes.REM_ING, ing:ingName})
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler(BurgerBuilder, axios));
