@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.module.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/Input/Input';
+
 
 class ContactData extends Component {
 
@@ -109,8 +111,6 @@ class ContactData extends Component {
         for (let formElement in newForm){
             formCheck = newForm[formElement].valid && formCheck
         }
-        
-
         this.setState({contactForm: newForm, formValid: formCheck})
     }
 
@@ -122,7 +122,7 @@ class ContactData extends Component {
             customerData[index] = this.state.contactForm[index].value
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ing,
             price: this.props.price,
             customer: customerData
         }
@@ -160,7 +160,6 @@ class ContactData extends Component {
 
         let BtnClass = [classes.Btn]
 
-
         let form = (
             <form onSubmit={this.orderHandler}>
                 {formInput}
@@ -181,4 +180,11 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+const mapDispatchToProps = state => {
+   return {
+    ing: state.ingredients,
+    price: state.total
+   } 
+}
+
+export default connect(mapDispatchToProps)(ContactData);

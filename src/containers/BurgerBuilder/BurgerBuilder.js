@@ -13,33 +13,9 @@ import * as actionTypes from '../../store/actions';
 
 class BurgerBuilder extends Component {
     state = {
-        ingredients: null,
-        total: 7,
         modal:false,
         loading: false
     }
-
-    // addIng = (type) => {
-    //     // let newIng = {...this.state.ingredients}
-    //     // const oldIngCount = newIng[type]
-    //     // const newIngCount = oldIngCount + 1
-    //     // newIng[type] = newIngCount
-    //     // const oldTotal = this.state.total
-    //     // const newTotal = oldTotal + INGREDIENT_COST[type]
-
-    //     // this.setState({ingredients: newIng, total: newTotal})
-    // }
-
-    // removeIng = (type) => {
-    //     // let newIng = {...this.state.ingredients}
-    //     // const oldIngCount = newIng[type]
-    //     // const newIngCount = oldIngCount - 1
-    //     // newIng[type] = newIngCount
-    //     // const oldTotal = this.state.total
-    //     // const newTotal = oldTotal - INGREDIENT_COST[type]
-
-    //     this.setState({ingredients: newIng, total:newTotal})
-    // }
 
     modalHandler = () => {
         this.setState({modal:true})
@@ -96,7 +72,6 @@ class BurgerBuilder extends Component {
         return (
             <Aux>
                 {burgerMenu}
-
                 <Modal 
                     modalShow={this.state.modal}
                     modalClose={this.modalCloseHandler}
