@@ -92,7 +92,7 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
         addIng: (ingName) => dispatch(actionCreators.addIng(ingName)),
         removeIng: (ingName) => dispatch(actionCreators.removeIng(ingName))

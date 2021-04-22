@@ -22,13 +22,11 @@ const rootReducer = (state = initialState, action) => {
         case(actionTypes.ADD_ING):
             const newIng = {...state.ingredients}
             newIng[action.ing] += 1
-            const newPrice = state.total + INGREDIENT_COST[action.ing]
-            return {...state, ingredients: newIng, total: newPrice};
+            return {...state, ingredients: newIng, total: state.total + INGREDIENT_COST[action.ing]};
         case (actionTypes.REM_ING):
             const updIng = {...state.ingredients}
-            updIng[action.ing] -= 1
-            const updPrice = state.total - INGREDIENT_COST[action.ing]
-            return {...state, ingredients: updIng, total: updPrice };
+            updIng[action.ing] -= 1;
+            return {...state, ingredients: updIng, total: state.total - INGREDIENT_COST[action.ing] };
     }
     return state
 }
