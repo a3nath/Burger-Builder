@@ -8,22 +8,23 @@ const INGREDIENT_COST = {
 }
 
 const initialState = {
-    ingredients:{
-        lettuce: 1,
-        tomato: 1,
-        cheese: 1,
-        meat: 1
-    },
-        total:7
+    ingredients:null,
+    total:0,
+    error: false
 }
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
+        case(actionTypes.INITIAL_ING):
+            const iniIng = action.ing;
+            return {...state, ingredients: iniIng, error:false}
+        case(actionTypes.INITIAL_ERROR):
+            return {...state, error: true}
         case(actionTypes.ADD_ING):
             const newIng = {...state.ingredients}
             newIng[action.ing] += 1
             return {...state, ingredients: newIng, total: state.total + INGREDIENT_COST[action.ing]};
-        case (actionTypes.REM_ING):
+        case (actionTypes.REMOVE_ING):
             const updIng = {...state.ingredients}
             updIng[action.ing] -= 1;
             return {...state, ingredients: updIng, total: state.total - INGREDIENT_COST[action.ing] };

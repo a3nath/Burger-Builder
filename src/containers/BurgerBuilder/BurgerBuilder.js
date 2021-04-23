@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from '../../axios-orders'
 
 import Aux from '../../hoc/Aux/Aux';
 import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/BurgerControls/BurgerControls';
 import Modal from '../../components/UI/Modal/Modal';
-import axios from '../../axios-orders';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -30,11 +30,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount(){
-        // axios.get('https://academindburger-default-rtdb.firebaseio.com/ingredients.json')
-        //     .then(response => {
-        //         this.setState({ingredients: response.data})
-        //     })
-        //     .catch(err => { console.log(err)})
+        this.props.iniIng()
     }
 
 
@@ -85,6 +81,7 @@ class BurgerBuilder extends Component {
     }
 }
 
+
 const mapStateToProps = state => {
     return {
         ing: state.ingredients,
@@ -94,10 +91,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        iniIng: () => dispatch(actionCreators.iniIngthunk()),
         addIng: (ingName) => dispatch(actionCreators.addIng(ingName)),
         removeIng: (ingName) => dispatch(actionCreators.removeIng(ingName))
     }
 }
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler(BurgerBuilder, axios));
