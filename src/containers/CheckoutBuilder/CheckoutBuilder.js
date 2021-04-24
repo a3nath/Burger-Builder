@@ -34,10 +34,10 @@ class CheckoutBuilder extends Component {
     }
 } 
 
-const mapDispatchToProps = state => {
+const mapStateToProps = state => {
     return {
-        ing: state.ingredients,
+        ing: state.burgerBuilder.ingredients,
     }
 }
 
-export default connect(mapDispatchToProps)(CheckoutBuilder);
+export default connect(mapStateToProps)(CheckoutBuilder);

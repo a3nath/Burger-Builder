@@ -38,7 +38,7 @@ class BurgerBuilder extends Component {
 
         let burgerMenu = <Spinner/>
         let orderSummary = null
-        
+
         if (this.props.ing){
             burgerMenu = 
                 <Aux>
@@ -84,8 +84,8 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ing: state.burger.ingredients,
-        total: state.burger.total
+        ing: state.burgerBuilder.ingredients,
+        total: state.burgerBuilder.total
     }
 }
 

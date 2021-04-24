@@ -1,4 +1,3 @@
-import { initialErr } from './actionCreators';
 import * as actionTypes from './actionTypes';
 
 const initialState = {
@@ -9,11 +8,11 @@ const initialState = {
 const orderReducer = (state = initialState, action) => {
     switch(action.type){
         case (actionTypes.POST_ORDER):
-            return state;
+            return {...state, orders: state.orders.concat(action.order), error: false};
         case (actionTypes.POST_ERROR):
             return {...state, error:true}
         case (actionTypes.GET_ORDERS):
-            return { ...state, error: false}
+            return {...state, orders: action.orders, error: false}
         case (actionTypes.ORDERS_ERROR):
             return {...state, error: true};
         default:

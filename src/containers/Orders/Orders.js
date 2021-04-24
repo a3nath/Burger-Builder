@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import { connect } from 'react-redux';
+import * as actionCreators from '../../store/actionCreators';
 
 class Orders extends Component {
 
     state={
-        orders:[],
         loading:true
     }
 
     componentDidMount() {
+        this.props.getOrders()
         // axios.get('/orders.json')
         //     .then(res => {
         //         const fetchedOrders = []
@@ -40,16 +41,17 @@ class Orders extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
-        ordersData: state.orders
-    }
-}
+        ordersData: state.orderBuilder.orders
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
-
-    }
-}
+        getOrders: () => dispatch(actionCreators.getOrdersthunk())
+    };
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));

@@ -2,7 +2,6 @@ import axios from '../axios-orders';
 import * as actionTypes from './actionTypes';
 
 export const initialIng = ingArr => {
-    console.log(ingArr)
     return {type: actionTypes.INITIAL_ING, ing: ingArr}
 };
 
@@ -27,6 +26,7 @@ export const postError = error => {
 }
 
 export const getOrders = orders => {
+    console.log(orders)
     return {type: actionTypes.GET_ORDERS, orders: orders}
 }
 
@@ -39,7 +39,6 @@ export const iniIngthunk = () => {
         return (
             axios.get('https://academindburger-default-rtdb.firebaseio.com/ingredients.json')
                 .then(response => {
-                    console.log(response)
                     dispatch(initialIng(response.data))
                 })
                 .catch(err => { 
@@ -54,7 +53,9 @@ export const postOrderthunk = (order) => {
         return (
             axios.post('/orders.json', order)
             .then(response => {
-                dispatch(postOrder(response.data))
+                const orderId = response.data.name
+                const orderIdData = {order, id: orderId}
+                dispatch(postOrder(orderIdData))
                 // this.props.history.push('/')
             })
             .catch(error => {
@@ -65,10 +66,10 @@ export const postOrderthunk = (order) => {
     }
 };
 
-export const getOrdersthunk = (orders) => {
+export const getOrdersthunk = () => {
     return dispatch => {
         return (
-            axios.get('/orders.json')
+            axios.get('https://academindburger-default-rtdb.firebaseio.com/orders.json')
             .then(res => {
                 const fetchedOrders = []
                 for (let key in res.data){

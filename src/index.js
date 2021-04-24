@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import burgerReducer from './store/burgerReducer';
 import orderReducer from './store/orderReducer';
 
-const rootReducer = combineReducers({burger: burgerReducer, order: orderReducer})
+const rootReducer = combineReducers({burgerBuilder: burgerReducer, orderBuilder: orderReducer})
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)))
 
