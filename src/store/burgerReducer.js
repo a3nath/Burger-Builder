@@ -1,4 +1,4 @@
-import * as actionTypes from './actions';
+import * as actionTypes from './actionTypes';
 
 const INGREDIENT_COST = {
     lettuce: 1,
@@ -13,11 +13,11 @@ const initialState = {
     error: false
 }
 
-const rootReducer = (state = initialState, action) => {
+const burgerReducer = (state = initialState, action) => {
     switch(action.type){
         case(actionTypes.INITIAL_ING):
             const iniIng = action.ing;
-            return {...state, ingredients: iniIng, error:false}
+            return {...state, ingredients: action.ing, error:true}
         case(actionTypes.INITIAL_ERROR):
             return {...state, error: true}
         case(actionTypes.ADD_ING):
@@ -27,9 +27,10 @@ const rootReducer = (state = initialState, action) => {
         case (actionTypes.REMOVE_ING):
             const updIng = {...state.ingredients}
             updIng[action.ing] -= 1;
-            return {...state, ingredients: updIng, total: state.total - INGREDIENT_COST[action.ing] };
+            return {...state, ingredients: updIng, total: state.total - INGREDIENT_COST[action.ing]};
+        default:
+            return state
     }
-    return state
 }
 
-export default rootReducer;
+export default burgerReducer;

@@ -9,7 +9,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import * as actionCreators from '../../store/actions';
+import * as actionCreators from '../../store/actionCreators';
 
 class BurgerBuilder extends Component {
     state = {
@@ -25,9 +25,9 @@ class BurgerBuilder extends Component {
         this.setState({modal:false})
     }
 
-    purchaseHandler =() => {
-        this.setState({loading: true})
-    }
+    // purchaseHandler =() => {
+    //     this.setState({loading: true})
+    // }
 
     componentDidMount(){
         this.props.iniIng()
@@ -38,7 +38,7 @@ class BurgerBuilder extends Component {
 
         let burgerMenu = <Spinner/>
         let orderSummary = null
-
+        
         if (this.props.ing){
             burgerMenu = 
                 <Aux>
@@ -84,8 +84,8 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ing: state.ingredients,
-        total: state.total
+        ing: state.burger.ingredients,
+        total: state.burger.total
     }
 }
 
