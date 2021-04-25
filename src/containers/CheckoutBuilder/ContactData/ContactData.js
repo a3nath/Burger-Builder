@@ -83,8 +83,7 @@ class ContactData extends Component {
                 },
             },
         formValid:false,
-        // loading:false
-    }
+    };
 
     validHandler = (value, rules) => {
         let inputValid = true
@@ -98,7 +97,7 @@ class ContactData extends Component {
             inputValid = value.length >= rules.MinLen && inputValid
         }
         return inputValid
-    }
+    };
 
     inputHandler = (event, inputElement) => {
         const newForm = {...this.state.contactForm};
@@ -112,17 +111,14 @@ class ContactData extends Component {
             formCheck = newForm[formElement].valid && formCheck
         }
         this.setState({contactForm: newForm, formValid: formCheck})
-    }
+    };
 
     orderHandler = (event) => {
         event.preventDefault();
-        // this.setState({loading: true});
         const customerData = {};
         for (let index in this.state.contactForm){
             customerData[index] = this.state.contactForm[index].value
         }
-
-
 
         const order = {
             ingredients: this.props.ing,
@@ -138,7 +134,7 @@ class ContactData extends Component {
         //     .catch(error => {
         //         this.setState({loading: false}) 
         //     })
-    }
+    };
 
     render(){
 
@@ -150,18 +146,19 @@ class ContactData extends Component {
 
         const formInput = formArr.map(element => {
             return(
-            <Input 
-                key={element.id} 
-                inputType= {element.config.elementType} 
-                name={element.id} 
-                value ={element.config.value} 
-                elementConfig={element.config.elementConfig}
-                changed={(event) => this.inputHandler(event, element.id)}
-                invalid={!element.config.valid}
-                validation={element.config.validation}
-                touched={element.config.touched}/>)
+                <Input 
+                    key={element.id} 
+                    inputType= {element.config.elementType} 
+                    name={element.id} 
+                    value ={element.config.value} 
+                    elementConfig={element.config.elementConfig}
+                    changed={(event) => this.inputHandler(event, element.id)}
+                    invalid={!element.config.valid}
+                    validation={element.config.validation}
+                    touched={element.config.touched}
+                />
+            )
         })
-
 
         let form = (
             <form onSubmit={this.orderHandler}>
@@ -170,9 +167,9 @@ class ContactData extends Component {
             </form>
         ); 
 
-        // if (this.state.loading == true){
-        //     form = <Spinner/>
-        // }
+        if (this.props.loading == true){
+            form = <Spinner/>
+        }
 
         return(
             <div className={classes.ContactData}>
@@ -181,19 +178,21 @@ class ContactData extends Component {
             </div>
         )
     }
-}
+};
 
 const mapStateToProps = state => {
    return {
     ing: state.burgerBuilder.ingredients,
-    price: state.burgerBuilder.total
+    price: state.burgerBuilder.total,
+    //when I click on the form loading:true, show spinner and then once successfully posted loading false
+    loading: state.orderBuilder.loading
    } 
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return{
         postOrder: (orderData) => dispatch(actionCreators.postOrderthunk(orderData))
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactData);

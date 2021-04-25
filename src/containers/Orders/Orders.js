@@ -5,12 +5,9 @@ import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actionCreators from '../../store/actionCreators';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Orders extends Component {
-
-    state={
-        loading:true
-    }
 
     componentDidMount() {
         this.props.getOrders()
@@ -30,8 +27,12 @@ class Orders extends Component {
         //     })
     }
     render(){
-            const orderArr = this.props.ordersData.map(order => (<Order price={+order.price} ingredients={order.ingredients} key={order.id}/>
+            let orderArr = this.props.ordersData.map(order => (<Order price={+order.price} ingredients={order.ingredients} key={order.id}/>
         ))
+            if (this.props.loading) {
+                orderArr = <Spinner/>
+        }
+
         return(
             <div>
                     {orderArr}
@@ -43,7 +44,8 @@ class Orders extends Component {
 const mapStateToProps = state => {
     console.log(state);
     return {
-        ordersData: state.orderBuilder.orders
+        ordersData: state.orderBuilder.orders,
+        loading: state.orderBuilder.loading
     };
 };
 

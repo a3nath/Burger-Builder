@@ -17,22 +17,26 @@ export const removeIng = ingName => {
     return {type: actionTypes.REMOVE_ING, ing:ingName}
 };
 
+export const startOrder = () => {
+    return {type: actionTypes.START_ORDER}
+};
+
 export const postOrder = orderData => {
     return {type: actionTypes.POST_ORDER, order:orderData }
-}
+};
 
 export const postError = error => {
     return {type: actionTypes.POST_ERROR, error:error}
-}
+};
 
 export const getOrders = orders => {
     console.log(orders)
     return {type: actionTypes.GET_ORDERS, orders: orders}
-}
+};
 
 export const ordersError = error => {
     return {type: actionTypes.ORDERS_ERROR, error: error}
-}
+};
 
 export const iniIngthunk = () => {
     return (dispatch) => {
@@ -51,10 +55,11 @@ export const iniIngthunk = () => {
 export const postOrderthunk = (order) => {
     return (dispatch) => {
         return (
+            dispatch(startOrder()),
             axios.post('/orders.json', order)
             .then(response => {
                 const orderId = response.data.name
-                const orderIdData = {order, id: orderId}
+                const orderIdData = {...order, id: orderId}
                 dispatch(postOrder(orderIdData))
                 // this.props.history.push('/')
             })
@@ -69,6 +74,7 @@ export const postOrderthunk = (order) => {
 export const getOrdersthunk = () => {
     return dispatch => {
         return (
+            dispatch(startOrder()),
             axios.get('https://academindburger-default-rtdb.firebaseio.com/orders.json')
             .then(res => {
                 const fetchedOrders = []
@@ -80,4 +86,4 @@ export const getOrdersthunk = () => {
             .catch( err=> dispatch(ordersError(err)))
         )
     }
-}
+};
