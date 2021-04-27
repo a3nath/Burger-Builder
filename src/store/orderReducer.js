@@ -3,15 +3,18 @@ import * as actionTypes from './actionTypes';
 const initialState = {
     orders: [], 
     error:false,
-    loading:false
+    loading:false,
+    purchased:false
 };
 
 const orderReducer = (state = initialState, action) => {
     switch(action.type){
+        case (actionTypes.PURCHASED):
+            return {...state, purchased: false}
         case (actionTypes.START_ORDER):
             return {...state, loading:true}
         case (actionTypes.POST_ORDER):
-            return {...state, orders: state.orders.concat(action.order), error: false, loading:false};
+            return {...state, orders: state.orders.concat(action.order), error: false, loading:false, purchased:true};
         case (actionTypes.POST_ERROR):
             return {...state, error:true, loading:false}
         case (actionTypes.GET_ORDERS):

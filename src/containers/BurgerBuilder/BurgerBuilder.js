@@ -19,19 +19,19 @@ class BurgerBuilder extends Component {
 
     modalHandler = () => {
         this.setState({modal:true})
-    }
+    };
 
     modalCloseHandler = () => {
         this.setState({modal:false})
-    }
+    };
 
-    // purchaseHandler =() => {
-    //     this.setState({loading: true})
-    // }
+    purchaseHandler =() => {
+        this.props.purchaseStart()
+    };
 
     componentDidMount(){
         this.props.iniIng()
-    }
+    };
 
 
     render () {
@@ -85,7 +85,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
     return {
         ing: state.burgerBuilder.ingredients,
-        total: state.burgerBuilder.total
+        total: state.burgerBuilder.total,
+        purchased: state.orderBuilder.purchased
     }
 }
 
@@ -93,7 +94,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         iniIng: () => dispatch(actionCreators.iniIngthunk()),
         addIng: (ingName) => dispatch(actionCreators.addIng(ingName)),
-        removeIng: (ingName) => dispatch(actionCreators.removeIng(ingName))
+        removeIng: (ingName) => dispatch(actionCreators.removeIng(ingName)),
+        purchaseStart: () => dispatch(actionCreators.purchased())
     }
 }
 

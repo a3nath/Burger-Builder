@@ -38,6 +38,10 @@ export const ordersError = error => {
     return {type: actionTypes.ORDERS_ERROR, error: error}
 };
 
+export const purchased = () => {
+    return {type: actionTypes.PURCHASED}
+}
+
 export const iniIngthunk = () => {
     return (dispatch) => {
         return (

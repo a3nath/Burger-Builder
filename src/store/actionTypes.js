@@ -7,4 +7,5 @@ export const POST_ORDER = "POST_ORDER";
 export const POST_ERROR = "POST_ERROR";
 export const GET_ORDERS = "GET_ORDERS";
 export const ORDERS_ERROR = 'ORDERS_ERROR';
+export const PURCHASED = 'PURCHASED'
 
