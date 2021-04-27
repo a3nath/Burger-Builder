@@ -17,7 +17,7 @@ const burgerReducer = (state = initialState, action) => {
     switch(action.type){
         case(actionTypes.INITIAL_ING):
             const iniIng = action.ing;
-            return {...state, ingredients: action.ing, error:true}
+            return {...state, ingredients: action.ing, total:0, error:true}
         case(actionTypes.INITIAL_ERROR):
             return {...state, error: true}
         case(actionTypes.ADD_ING):
