@@ -1,4 +1,4 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../actionTypes';
 
 const INGREDIENT_COST = {
     lettuce: 1,
@@ -16,7 +16,6 @@ const initialState = {
 const burgerReducer = (state = initialState, action) => {
     switch(action.type){
         case(actionTypes.INITIAL_ING):
-            const iniIng = action.ing;
             return {...state, ingredients: action.ing, total:0, error:true}
         case(actionTypes.INITIAL_ERROR):
             return {...state, error: true}

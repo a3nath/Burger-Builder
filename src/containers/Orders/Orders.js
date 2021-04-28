@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actionCreators from '../../store/actionCreators';
+import * as actionCreators from '../../store/actionCreators/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Orders extends Component {

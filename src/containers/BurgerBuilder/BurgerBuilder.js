@@ -9,7 +9,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import * as actionCreators from '../../store/actionCreators';
+import * as actionCreators from '../../store/actionCreators/index';
 
 class BurgerBuilder extends Component {
     state = {
@@ -98,7 +98,5 @@ const mapDispatchToProps = (dispatch) => {
         purchaseStart: () => dispatch(actionCreators.purchased())
     }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler(BurgerBuilder, axios));

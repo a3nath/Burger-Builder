@@ -5,7 +5,7 @@ import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.module.css';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/Input/Input';
-import  * as actionCreators from '../../../store/actionCreators';
+import  * as actionCreators from '../../../store/actionCreators/index';
 
 
 class ContactData extends Component {
