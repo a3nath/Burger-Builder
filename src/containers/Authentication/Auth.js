@@ -41,6 +41,7 @@ class AuthData extends Component {
             },
         },
         formValid:false,
+        isSignIn:true
     };
 
     validHandler = (value, rules) => {
@@ -73,7 +74,11 @@ class AuthData extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.auth(this.state.authForm.email.value, this.state.authForm.password.value, )
+        this.props.auth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignIn)
+    }
+
+    toggleSignIn = () => {
+        this.setState({isSignIn: !this.state.isSignIn})
     }
 
 
@@ -116,6 +121,7 @@ class AuthData extends Component {
             <div className={classes.AuthData}>
                 <h4>Enter Login data</h4>
                 {form}
+                <Button BtnType='Danger' clicked={this.toggleSignIn}>SWITCH to {this.state.isSignIn ? "signup" : "SignIn"}</Button>
             </div>
         )
     }
@@ -130,8 +136,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        authStart: () => dispatch(actionCreators.authStart),
-        auth: (email, password) => dispatch(actionCreators.authThunk(email, password))
+        auth: (email, password, signedIn) => dispatch(actionCreators.authThunk(email, password, signedIn))
     }
 };
 

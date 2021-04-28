@@ -11,7 +11,7 @@ const authReducer = (state = initialState, action) => {
         case(actionTypes.AUTH_START):
             return state
         case(actionTypes.AUTH_SUCCESS):
-            return {...state}
+            return state
         case(actionTypes.AUTH_FAILED):
             return {...state, error: true}
         default: 
