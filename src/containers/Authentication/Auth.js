@@ -69,7 +69,12 @@ class AuthData extends Component {
         //     formCheck = newForm[formElement].valid && formCheck
         // }
         this.setState({authForm: newForm})
-    };
+    }; 
+
+    submitHandler = (event) => {
+        event.preventDefault();
+        this.props.auth(this.state.authForm.email.value, this.state.authForm.password.value, )
+    }
 
 
     render(){
@@ -97,10 +102,9 @@ class AuthData extends Component {
         })
 
         let form = (
-            <form onSubmit={'/'}>
+            <form onSubmit={this.submitHandler}>
                 {formInput}
                 <Button BtnType='Success'>Submit</Button>
-                <Button BtnType='Danger'>Switch</Button>
             </form>
         ); 
 
@@ -119,16 +123,15 @@ class AuthData extends Component {
 
 const mapStateToProps = state => {
    return {
-    ing: state.burgerBuilder.ingredients,
-    price: state.burgerBuilder.total,
     //when I click on the form loading:true, show spinner and then once successfully posted loading false
-    loading: state.orderBuilder.loading
+    loading: state.authReducer.loading
    } 
 };
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        postOrder: (orderData) => dispatch(actionCreators.postOrderthunk(orderData))
+        authStart: () => dispatch(actionCreators.authStart),
+        auth: (email, password) => dispatch(actionCreators.authThunk(email, password))
     }
 };
 

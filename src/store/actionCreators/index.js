@@ -8,4 +8,9 @@ export {
     postOrderthunk, 
     getOrdersthunk 
 } from './orderActions';
+export {
+    authStart, 
+    authThunk 
+} from './authActions';
+
 
