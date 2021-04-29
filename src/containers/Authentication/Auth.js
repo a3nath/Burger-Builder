@@ -6,6 +6,7 @@ import classes from './Auth.module.css';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/Input/Input';
 import  * as actionCreators from '../../store/actionCreators/index';
+import { Redirect } from 'react-router';
 
 
 class AuthData extends Component {
@@ -75,6 +76,13 @@ class AuthData extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.props.auth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignIn)
+        // if (this.props.isAuth) {
+        //     console.log(this.props.isIng)
+        //     this.props.history.push('/orders')
+        // }
+        // else {
+        //     this.props.history.replace('/')
+        // }
     }
 
     toggleSignIn = () => {
@@ -124,9 +132,17 @@ class AuthData extends Component {
             )
         }
 
+        let authRedir = null;
+        if (this.props.isAuth){
+            authRedir = (
+                <Redirect to='/'/>
+            )
+        }
+
         return(
             <div className={classes.AuthData}>
                 {errorMess}
+                {authRedir}
                 <h4>Enter Login data</h4>
                 {form}
                 <Button BtnType='Danger' clicked={this.toggleSignIn}>SWITCH to {this.state.isSignIn ? "signup" : "SignIn"}</Button>
@@ -139,7 +155,9 @@ const mapStateToProps = state => {
    return {
     //when I click on the form loading:true, show spinner and then once successfully posted loading false
     loading: state.authReducer.loading,
-    error: state.authReducer.error
+    error: state.authReducer.error,
+    isIng: state.burgerBuilder.ingredients,
+    isAuth: state.authReducer.token != null
    } 
 };
 

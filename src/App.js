@@ -6,7 +6,7 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import CheckoutBuilder from './containers/CheckoutBuilder/CheckoutBuilder';
 import Orders from './containers/Orders/Orders';
 import Auth from './containers/Authentication/Auth';
-import Logout from './containers/Authentication/logout/Logout';
+import Logout from './containers/Authentication/Logout/Logout';
 
 class App extends Component {
   render () {
