@@ -117,8 +117,16 @@ class AuthData extends Component {
             form = <Spinner/>
         }
 
+        let errorMess = null;
+        if (this.props.error){
+            errorMess = (
+                <p>{this.props.error.message}</p>
+            )
+        }
+
         return(
             <div className={classes.AuthData}>
+                {errorMess}
                 <h4>Enter Login data</h4>
                 {form}
                 <Button BtnType='Danger' clicked={this.toggleSignIn}>SWITCH to {this.state.isSignIn ? "signup" : "SignIn"}</Button>
@@ -130,7 +138,8 @@ class AuthData extends Component {
 const mapStateToProps = state => {
    return {
     //when I click on the form loading:true, show spinner and then once successfully posted loading false
-    loading: state.authReducer.loading
+    loading: state.authReducer.loading,
+    error: state.authReducer.error
    } 
 };
 

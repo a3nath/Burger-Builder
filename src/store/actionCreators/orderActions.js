@@ -27,11 +27,11 @@ export const purchased = () => {
 }
 
 
-export const postOrderthunk = (order) => {
+export const postOrderthunk = (order,token) => {
     return (dispatch) => {
         return (
             dispatch(startOrder()),
-            axios.post('/orders.json', order)
+            axios.post(`/orders.json?auth=${token}`, order)
             .then(response => {
                 const orderId = response.data.name
                 const orderIdData = {...order, id: orderId}
@@ -46,11 +46,11 @@ export const postOrderthunk = (order) => {
     }
 };
 
-export const getOrdersthunk = () => {
+export const getOrdersthunk = (token) => {
     return dispatch => {
         return (
             dispatch(startOrder()),
-            axios.get('https://academindburger-default-rtdb.firebaseio.com/orders.json')
+            axios.get(`https://academindburger-default-rtdb.firebaseio.com/orders.json?auth=${token}`)
             .then(res => {
                 const fetchedOrders = []
                 for (let key in res.data){

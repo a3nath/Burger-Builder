@@ -10,7 +10,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 class Orders extends Component {
 
     componentDidMount() {
-        this.props.getOrders()
+        this.props.getOrders(this.props.token)
         // axios.get('/orders.json')
         //     .then(res => {
         //         const fetchedOrders = []
@@ -45,13 +45,14 @@ const mapStateToProps = state => {
     console.log(state);
     return {
         ordersData: state.orderBuilder.orders,
-        loading: state.orderBuilder.loading
+        loading: state.orderBuilder.loading,
+        token: state.authReducer.token
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getOrders: () => dispatch(actionCreators.getOrdersthunk())
+        getOrders: (token) => dispatch(actionCreators.getOrdersthunk(token))
     };
 };
 

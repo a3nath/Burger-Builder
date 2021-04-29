@@ -125,7 +125,7 @@ class ContactData extends Component {
             price: this.props.price,
             customer: customerData
         }
-        this.props.postOrder(order);
+        this.props.postOrder(order, this.props.token);
         // axios.post('/orders.json', order)
         //     .then(response => {
         //         this.setState({loading:false})
@@ -185,13 +185,14 @@ const mapStateToProps = state => {
     ing: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.total,
     //when I click on the form loading:true, show spinner and then once successfully posted loading false
-    loading: state.orderBuilder.loading
+    loading: state.orderBuilder.loading,
+    token: state.authReducer.token
    } 
 };
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        postOrder: (orderData) => dispatch(actionCreators.postOrderthunk(orderData))
+        postOrder: (orderData, token) => dispatch(actionCreators.postOrderthunk(orderData, token))
     }
 };
 
