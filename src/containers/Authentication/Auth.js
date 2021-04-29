@@ -7,6 +7,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/Input/Input';
 import  * as actionCreators from '../../store/actionCreators/index';
 import { Redirect } from 'react-router';
+import BurgerIngredient from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 
 
 class AuthData extends Component {
@@ -91,6 +92,20 @@ class AuthData extends Component {
 
 
     render(){
+        
+        console.log('transformed')
+        let transformedIngredients = Object.keys( this.props.ing )
+        .map( igKey => {
+            return [...Array( this.props.ing[igKey] )].map( ( _, i ) => {
+                return <BurgerIngredient key={igKey + i} type={igKey} />
+            } );
+        } )
+        .reduce((arr, el) => {
+            return arr.concat(el)
+        }, []);
+
+        console.log(transformedIngredients.length)
+     
 
         const formArr = []
 
@@ -133,9 +148,16 @@ class AuthData extends Component {
         }
 
         let authRedir = null;
-        if (this.props.isAuth){
+        console.log('ing')
+        console.log(this.props.ing)
+        if (this.props.isAuth && transformedIngredients.length == 0){
             authRedir = (
                 <Redirect to='/'/>
+            )
+        }
+        else if (this.props.isAuth && transformedIngredients.length !== 0 ) {
+            authRedir = (
+                <Redirect to='/checkout'/>
             )
         }
 
@@ -156,7 +178,7 @@ const mapStateToProps = state => {
     //when I click on the form loading:true, show spinner and then once successfully posted loading false
     loading: state.authReducer.loading,
     error: state.authReducer.error,
-    isIng: state.burgerBuilder.ingredients,
+    ing: state.burgerBuilder.ingredients,
     isAuth: state.authReducer.token != null
    } 
 };
