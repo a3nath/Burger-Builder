@@ -10,7 +10,8 @@ export {
 } from './orderActions';
 export {
     authStart, 
-    authThunk 
+    authThunk,
+    authLogout
 } from './authActions';
 
 
