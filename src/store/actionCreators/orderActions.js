@@ -31,6 +31,7 @@ export const postOrderthunk = (order,token) => {
     return (dispatch) => {
         return (
             dispatch(startOrder()),
+            //if you have authenticated you have token and can do post request
             axios.post(`/orders.json?auth=${token}`, order)
             .then(response => {
                 const orderId = response.data.name
@@ -46,11 +47,11 @@ export const postOrderthunk = (order,token) => {
     }
 };
 
-export const getOrdersthunk = (token) => {
+export const getOrdersthunk = (token, userId) => {
     return dispatch => {
-        return (
-            dispatch(startOrder()),
-            axios.get(`https://academindburger-default-rtdb.firebaseio.com/orders.json?auth=${token}`)
+            dispatch(startOrder());
+            const queryparams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`
+            axios.get(`https://academindburger-default-rtdb.firebaseio.com/orders.json${queryparams}`)
             .then(res => {
                 const fetchedOrders = []
                 for (let key in res.data){
@@ -59,6 +60,5 @@ export const getOrdersthunk = (token) => {
                 dispatch(getOrders(fetchedOrders))
             })
             .catch( err=> dispatch(ordersError(err)))
-        )
     }
 };

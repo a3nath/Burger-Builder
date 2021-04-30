@@ -123,7 +123,8 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ing,
             price: this.props.price,
-            customer: customerData
+            customer: customerData,
+            userId: this.props.userId
         }
         this.props.postOrder(order, this.props.token);
         // axios.post('/orders.json', order)
@@ -186,7 +187,8 @@ const mapStateToProps = state => {
     price: state.burgerBuilder.total,
     //when I click on the form loading:true, show spinner and then once successfully posted loading false
     loading: state.orderBuilder.loading,
-    token: state.authReducer.token
+    token: state.authReducer.token,
+    userId: state.authReducer.userId
    } 
 };
 
