@@ -15,7 +15,7 @@ export const authFailed = (error) => {
 
 export const authLogout = () => {
     localStorage.removeItem('token')
-    localStorage.removeItem('expirationDate')
+    localStorage.removeItem('expirationTime')
     localStorage.removeItem('userId')
     return {type: actionTypes.AUTH_LOGOUT}
 };
@@ -36,8 +36,9 @@ export const authThunk = (email, password, signedIn) => {
         }
         axios.post(url, userCred)
             .then(response => {
-                localStorage.setItem('token', response.data.idtoken)
-                localStorage.setItem('expirationDate', response.data.expiresIn)
+                localStorage.setItem('token', response.data.idToken)
+                console.log(response.data)
+                localStorage.setItem('expirationTime', response.data.expiresIn)
                 localStorage.setItem('userId', response.data.localId)
                 dispatch(authSuccess(response.data.idToken,response.data.localId))
                 dispatch(checkTimeout(response.data.expiresIn))
@@ -51,16 +52,16 @@ export const authThunk = (email, password, signedIn) => {
 export const autoLogin = () => {
     return dispatch => {
         const token = localStorage.getItem('token')
-        const expirationDate = localStorage.getItem('expirationDate')
+        const expirationDate = new Date(localStorage.getItem('expirationTime') * 1000 + new Date().getTime())
         const userId = localStorage.getItem('userId')
 
-        if (!token || new Date(expirationDate) <= new Date()){
+        if (!token || expirationDate <= new Date()){
             dispatch(authLogout)
         }
 
         else {
             dispatch(authSuccess(token, userId))
-            dispatch(checkTimeout(new Date(expirationDate).getTime() - new Date().getTime()) / 1000 )
+            dispatch(checkTimeout((expirationDate.getTime() - new Date().getTime())/1000))
         }
 
     }

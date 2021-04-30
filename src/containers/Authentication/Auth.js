@@ -92,21 +92,22 @@ class AuthData extends Component {
 
 
     render(){
+
+        let transformedIngredients = []
         
-        console.log('transformed')
-        let transformedIngredients = Object.keys( this.props.ing )
-        .map( igKey => {
-            return [...Array( this.props.ing[igKey] )].map( ( _, i ) => {
-                return <BurgerIngredient key={igKey + i} type={igKey} />
-            } );
-        } )
-        .reduce((arr, el) => {
-            return arr.concat(el)
-        }, []);
-
-        console.log(transformedIngredients.length)
-     
-
+        console.log(this.props.ing)
+        if (this.props.ing !== null) {
+                transformedIngredients = Object.keys( this.props.ing )
+            .map( igKey => {
+                return [...Array( this.props.ing[igKey] )].map( ( _, i ) => {
+                    return <BurgerIngredient key={igKey + i} type={igKey} />
+                } );
+            } )
+            .reduce((arr, el) => {
+                return arr.concat(el)
+            }, []);
+        }
+ 
         const formArr = []
 
         for (let index in this.state.authForm){
@@ -148,8 +149,6 @@ class AuthData extends Component {
         }
 
         let authRedir = null;
-        console.log('ing')
-        console.log(this.props.ing)
         if (this.props.isAuth && transformedIngredients.length == 0){
             authRedir = (
                 <Redirect to='/'/>

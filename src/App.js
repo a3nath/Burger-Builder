@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Layout from './components/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
@@ -7,7 +8,6 @@ import CheckoutBuilder from './containers/CheckoutBuilder/CheckoutBuilder';
 import Orders from './containers/Orders/Orders';
 import Auth from './containers/Authentication/Auth';
 import Logout from './containers/Authentication/Logout/Logout';
-import { connect } from 'react-redux';
 import * as actionCreators from './store/actionCreators/index';
 
 
@@ -17,22 +17,42 @@ class App extends Component {
     this.props.onLogin()
   }
 
+  
   render () {
+  
+      let routes = 
+        <Switch>
+          <Route exact path='/' component={BurgerBuilder} />
+          <Route path='/auth' component={Auth}/>
+          <Redirect to='/'/>
+        </Switch>
+
+      if (this.props.isAuthenticated) {
+        routes =      
+          <Switch>
+            <Route exact path='/' component={BurgerBuilder} />
+            <Route path='/checkout' component={CheckoutBuilder}/>
+            <Route path='/orders' component={Orders}/>
+            <Route path='/logout' component={Logout}/>
+            <Redirect to='/'/>
+          </Switch>
+      }
+    
     return (
       <div>
         <BrowserRouter>
           <Layout>
-            <Switch>
-              <Route exact path='/' component={BurgerBuilder} />
-              <Route path='/checkout' component={CheckoutBuilder}/>
-              <Route path='/orders' component={Orders}/>
-              <Route path='/auth' component={Auth}/>
-              <Route path='/logout' component={Logout}/>
-            </Switch>
+            {routes}
           </Layout>
         </BrowserRouter>
       </div>
     );
+  }
+}
+
+const mapStateToProps = state => {
+  return{
+    isAuthenticated: state.authReducer.token != null
   }
 }
 
@@ -42,4 +62,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(App));
+export default connect(mapStateToProps, mapDispatchToProps)(App);
