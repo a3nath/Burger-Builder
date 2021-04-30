@@ -11,7 +11,8 @@ export {
 export {
     authStart, 
     authThunk,
-    authLogout
+    authLogout,
+    autoLogin
 } from './authActions';
 
 
