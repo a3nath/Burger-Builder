@@ -25,7 +25,7 @@ class BurgerBuilder extends Component {
             this.setState({modal:true})
         }
         else{
-            this.props.history.push('/auth')
+            this.props.history.replace('/auth')
         }
     };
 

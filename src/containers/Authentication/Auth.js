@@ -149,16 +149,15 @@ class AuthData extends Component {
         }
 
         let authRedir = null;
-        if (this.props.isAuth && transformedIngredients.length == 0){
-            authRedir = (
-                <Redirect to='/'/>
-            )
-        }
-        else if (this.props.isAuth && transformedIngredients.length !== 0 ) {
+        if (this.props.isAuth && transformedIngredients.length !== 0){
             authRedir = (
                 <Redirect to='/checkout'/>
             )
+            
         }
+        else authRedir = (
+            <Redirect to='/'/>
+        )
 
         return(
             <div className={classes.AuthData}>
