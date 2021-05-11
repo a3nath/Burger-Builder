@@ -37,7 +37,6 @@ export const authThunk = (email, password, signedIn) => {
         axios.post(url, userCred)
             .then(response => {
                 localStorage.setItem('token', response.data.idToken)
-                console.log(response.data)
                 localStorage.setItem('expirationTime', response.data.expiresIn)
                 localStorage.setItem('userId', response.data.localId)
                 dispatch(authSuccess(response.data.idToken,response.data.localId))

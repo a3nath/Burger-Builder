@@ -84,18 +84,33 @@ class AuthData extends Component {
         // else {
         //     this.props.history.replace('/')
         // }
+        if (this.props.isAuth){
+         
+            console.log("We here")
+            // authRedir = <Redirect to='/checkout'/>
+        }
+        else {
+            console.log('Over here')
+            // authRedir = <Redirect to='/'/>
+        }
     }
+
 
     toggleSignIn = () => {
         this.setState({isSignIn: !this.state.isSignIn})
     }
 
+    // componentWillMount(){
+    //     console.log('token now')
+    //     console.log(this.props.isAuth)
+    // }
+
 
     render(){
-
+        console.log('sdcnjiknvsfjikdsvdsnusf')
+        console.log(this.props.isAuth)
         let transformedIngredients = []
         
-        console.log(this.props.ing)
         if (this.props.ing !== null) {
                 transformedIngredients = Object.keys( this.props.ing )
             .map( igKey => {
@@ -149,15 +164,12 @@ class AuthData extends Component {
         }
 
         let authRedir = null;
-        if (this.props.isAuth && transformedIngredients.length !== 0){
-            authRedir = (
-                <Redirect to='/checkout'/>
-            )
-            
-        }
-        else authRedir = (
-            <Redirect to='/'/>
-        )
+        console.log('ascdas')
+        console.log(this.props.loading)
+        // console.log(transformedIngredients)
+        // console.log(transformedIngredients.length)
+        console.log(authRedir)
+     
 
         return(
             <div className={classes.AuthData}>
@@ -177,7 +189,7 @@ const mapStateToProps = state => {
     loading: state.authReducer.loading,
     error: state.authReducer.error,
     ing: state.burgerBuilder.ingredients,
-    isAuth: state.authReducer.token != null
+    isAuth: state.authReducer.token
    } 
 };
 

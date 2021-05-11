@@ -10,7 +10,6 @@ import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actionCreators from '../../store/actionCreators/index';
-import { Redirect } from 'react-router';
 
 class BurgerBuilder extends Component {
     state = {
@@ -18,14 +17,12 @@ class BurgerBuilder extends Component {
         loading: false
     }
 
-
-
     modalHandler = () => {
         if (this.props.isAuth) {
             this.setState({modal:true})
         }
         else{
-            this.props.history.replace('/auth')
+            this.props.history.push('/auth')
         }
     };
 
@@ -96,7 +93,7 @@ const mapStateToProps = state => {
         ing: state.burgerBuilder.ingredients,
         total: state.burgerBuilder.total,
         purchased: state.orderBuilder.purchased,
-        isAuth: state.authReducer.token != null
+        isAuth: state.authReducer.token !== null
     }
 }
 
