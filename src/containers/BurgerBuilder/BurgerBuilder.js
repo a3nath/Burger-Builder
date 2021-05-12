@@ -22,6 +22,7 @@ class BurgerBuilder extends Component {
             this.setState({modal:true})
         }
         else{
+            this.props.authRedir('checkout')
             this.props.history.push('/auth')
         }
     };
@@ -102,7 +103,9 @@ const mapDispatchToProps = (dispatch) => {
         iniIng: () => dispatch(actionCreators.iniIngthunk()),
         addIng: (ingName) => dispatch(actionCreators.addIng(ingName)),
         removeIng: (ingName) => dispatch(actionCreators.removeIng(ingName)),
-        purchaseStart: () => dispatch(actionCreators.purchased())
+        purchaseStart: () => dispatch(actionCreators.purchased()),
+        authRedir: (path) => dispatch(actionCreators.authRedirect(path))
+
     }
 }
 

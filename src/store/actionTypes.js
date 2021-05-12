@@ -10,7 +10,9 @@ export const GET_ORDERS = "GET_ORDERS";
 export const ORDERS_ERROR = 'ORDERS_ERROR';
 export const PURCHASED = 'PURCHASED';
 
-export const AUTH_START = 'AUTH_START'
-export const AUTH_SUCCESS = 'AUTH_SUCCESS'
-export const AUTH_FAILED = 'AUTH_FAILED'
-export const AUTH_LOGOUT = 'AUTH_LOGOUT'
+export const AUTH_START = 'AUTH_START';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAILED = 'AUTH_FAILED';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+export const AUTH_REDIRECT = 'AUTH_REDIRECT';

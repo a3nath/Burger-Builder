@@ -65,3 +65,10 @@ export const autoLogin = () => {
 
     }
 }
+
+export const authRedirect = (path) => {
+    return {
+        type:actionTypes.AUTH_REDIRECT, 
+        path:path
+    }
+}

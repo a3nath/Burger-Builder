@@ -84,15 +84,15 @@ class AuthData extends Component {
         // else {
         //     this.props.history.replace('/')
         // }
-        if (this.props.isAuth){
+        // if (this.props.isAuth){
          
-            console.log("We here")
-            // authRedir = <Redirect to='/checkout'/>
-        }
-        else {
-            console.log('Over here')
-            // authRedir = <Redirect to='/'/>
-        }
+        //     console.log("We here")
+        //     // authRedir = <Redirect to='/checkout'/>
+        // }
+        // else {
+        //     console.log('Over here')
+        //     // authRedir = <Redirect to='/'/>
+        // }
     }
 
 
@@ -100,28 +100,27 @@ class AuthData extends Component {
         this.setState({isSignIn: !this.state.isSignIn})
     }
 
-    // componentWillMount(){
-    //     console.log('token now')
-    //     console.log(this.props.isAuth)
-    // }
+    componentDidMount(){
+        if(!this.props.burgerBuild && this.props.authRedir('/checkout')){
+            this.props.authRedir()
+        }
+    }
 
 
     render(){
-        console.log('sdcnjiknvsfjikdsvdsnusf')
-        console.log(this.props.isAuth)
-        let transformedIngredients = []
-        
-        if (this.props.ing !== null) {
-                transformedIngredients = Object.keys( this.props.ing )
-            .map( igKey => {
-                return [...Array( this.props.ing[igKey] )].map( ( _, i ) => {
-                    return <BurgerIngredient key={igKey + i} type={igKey} />
-                } );
-            } )
-            .reduce((arr, el) => {
-                return arr.concat(el)
-            }, []);
-        }
+        //let transformedIngredients = []
+        //
+        // if (this.props.ing !== null) {
+        //         transformedIngredients = Object.keys( this.props.ing )
+        //     .map( igKey => {
+        //         return [...Array( this.props.ing[igKey] )].map( ( _, i ) => {
+        //             return <BurgerIngredient key={igKey + i} type={igKey} />
+        //         } );
+        //     } )
+        //     .reduce((arr, el) => {
+        //         return arr.concat(el)
+        //     }, []);
+        // }
  
         const formArr = []
 
@@ -164,12 +163,9 @@ class AuthData extends Component {
         }
 
         let authRedir = null;
-        console.log('ascdas')
-        console.log(this.props.loading)
-        // console.log(transformedIngredients)
-        // console.log(transformedIngredients.length)
-        console.log(authRedir)
-     
+        if (this.props.isAuth && this.props.burgerBuild){
+            authRedir = <Redirect to={this.props.redirPath}/>
+        }
 
         return(
             <div className={classes.AuthData}>
@@ -189,13 +185,16 @@ const mapStateToProps = state => {
     loading: state.authReducer.loading,
     error: state.authReducer.error,
     ing: state.burgerBuilder.ingredients,
-    isAuth: state.authReducer.token
+    isAuth: state.authReducer.token !== null,
+    burgerBuild: state.burgerBuilder.burgerBuilding,
+    redirPath: state.authReducer.redirectPath
    } 
 };
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        auth: (email, password, signedIn) => dispatch(actionCreators.authThunk(email, password, signedIn))
+        auth: (email, password, signedIn) => dispatch(actionCreators.authThunk(email, password, signedIn)),
+        authRedir: () => dispatch(actionCreators.authRedirect('/'))
     }
 };
 
