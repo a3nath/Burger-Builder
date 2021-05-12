@@ -17,7 +17,7 @@ const initialState = {
 const burgerReducer = (state = initialState, action) => {
     switch(action.type){
         case(actionTypes.INITIAL_ING):
-            return {...state, ingredients: action.ing, total:0, error:false, burgerBuilding:true}
+            return {...state, ingredients: action.ing, total:0, error:false, burgerBuilding:false}
         case(actionTypes.INITIAL_ERROR):
             return {...state, error: true}
         case(actionTypes.ADD_ING):
@@ -25,9 +25,9 @@ const burgerReducer = (state = initialState, action) => {
             newIng[action.ing] += 1
             return {...state, ingredients: newIng, total: state.total + INGREDIENT_COST[action.ing], burgerBuilding:true};
         case (actionTypes.REMOVE_ING):
-            const updIng = {...state.ingredients, burgerBuilding:true}
+            const updIng = {...state.ingredients}
             updIng[action.ing] -= 1;
-            return {...state, ingredients: updIng, total: state.total - INGREDIENT_COST[action.ing]};
+            return {...state, ingredients: updIng, total: state.total - INGREDIENT_COST[action.ing], burgerBuilding:true};
         default:
             return state
     }

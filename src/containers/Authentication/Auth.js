@@ -7,8 +7,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/Input/Input';
 import  * as actionCreators from '../../store/actionCreators/index';
 import { Redirect } from 'react-router';
-import BurgerIngredient from '../../components/Burger/BurgerIngredient/BurgerIngredient';
-
 
 class AuthData extends Component {
 
@@ -77,51 +75,20 @@ class AuthData extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.props.auth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignIn)
-        // if (this.props.isAuth) {
-        //     console.log(this.props.isIng)
-        //     this.props.history.push('/orders')
-        // }
-        // else {
-        //     this.props.history.replace('/')
-        // }
-        // if (this.props.isAuth){
-         
-        //     console.log("We here")
-        //     // authRedir = <Redirect to='/checkout'/>
-        // }
-        // else {
-        //     console.log('Over here')
-        //     // authRedir = <Redirect to='/'/>
-        // }
-    }
-
+    };
 
     toggleSignIn = () => {
         this.setState({isSignIn: !this.state.isSignIn})
-    }
+    };
 
-    componentDidMount(){
-        if(!this.props.burgerBuild && this.props.authRedir('/checkout')){
-            this.props.authRedir()
-        }
-    }
-
+    // componentDidMount(){
+    //     if(!this.props.burgerBuild && this.props.redirPath !== '/'){
+    //         this.props.authRedir()
+    //     }
+    // };
 
     render(){
-        //let transformedIngredients = []
-        //
-        // if (this.props.ing !== null) {
-        //         transformedIngredients = Object.keys( this.props.ing )
-        //     .map( igKey => {
-        //         return [...Array( this.props.ing[igKey] )].map( ( _, i ) => {
-        //             return <BurgerIngredient key={igKey + i} type={igKey} />
-        //         } );
-        //     } )
-        //     .reduce((arr, el) => {
-        //         return arr.concat(el)
-        //     }, []);
-        // }
- 
+
         const formArr = []
 
         for (let index in this.state.authForm){
@@ -163,7 +130,7 @@ class AuthData extends Component {
         }
 
         let authRedir = null;
-        if (this.props.isAuth && this.props.burgerBuild){
+        if (this.props.isAuth){
             authRedir = <Redirect to={this.props.redirPath}/>
         }
 

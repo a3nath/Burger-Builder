@@ -20,24 +20,17 @@ class App extends Component {
   
   render () {
   
-      let routes = 
-        <Switch>
-          <Route exact path='/' component={BurgerBuilder} />
-          <Route path='/auth' component={Auth}/>
-          <Redirect to='/'/>
-        </Switch>
+    let routes = 
+      <Switch>
+        <Route exact path='/' component={BurgerBuilder} />
+        <Route path='/auth' component={Auth}/>
+        <Route path='/checkout' component={CheckoutBuilder}/>
+        <Route path='/orders' component={Orders}/>
+        <Route path='/logout' component={Logout}/>
+        <Redirect to='/'/>
+      </Switch>
 
-      if (this.props.isAuthenticated) {
-        routes =      
-          <Switch>
-            <Route exact path='/' component={BurgerBuilder} />
-            <Route path='/checkout' component={CheckoutBuilder}/>
-            <Route path='/orders' component={Orders}/>
-            <Route path='/logout' component={Logout}/>
-            <Redirect to='/'/>
-          </Switch>
-      }
-    
+
     return (
       <div>
         <BrowserRouter>
