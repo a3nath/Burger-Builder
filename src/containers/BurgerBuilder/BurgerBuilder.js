@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from '../../axios-orders'
 
@@ -11,81 +11,78 @@ import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actionCreators from '../../store/actionCreators/index';
 
-class BurgerBuilder extends Component {
-    state = {
-        modal:false,
-        loading: false
-    }
 
-    modalHandler = () => {
-        if (this.props.isAuth) {
-            this.setState({modal:true})
+
+const BurgerBuilder = props => {
+
+    const [modal, setModal] = useState(false)
+    const [loading, setLoading] = useState(false)
+  
+    const modalHandler = () => {
+        if (props.isAuth) {
+            setModal(true)
         }
         else{
-            this.props.authRedir('/checkout/')
-            this.props.history.push('/auth')
+            props.authRedir('/checkout/')
+            props.history.push('/auth')
         }
     };
 
-    modalCloseHandler = () => {
-        this.setState({modal:false})
+    const modalCloseHandler = () => {
+        setModal(false)
     };
 
-    purchaseHandler =() => {
-        this.props.purchaseStart()
+    const purchaseHandler =() => {
+        props.purchaseStart()
     };
 
-    componentDidMount(){
-        this.props.iniIng()
-    };
+    useEffect(() => {
+        props.iniIng()
+    }, [])
 
+    let burgerMenu = <Spinner/>
+    let orderSummary = null
 
-    render () {
-
-        let burgerMenu = <Spinner/>
-        let orderSummary = null
-
-        if (this.props.ing){
-            burgerMenu = 
-                <Aux>
-                    <Burger ingredients={this.props.ing} />
-                    <BurgerControls 
-                        ingredients={this.props.ing} 
-                        addControl={this.props.addIng} 
-                        removeControl = {this.props.removeIng}
-                        price={this.props.total} 
-                        modal={this.modalHandler}
-                        auth={this.props.isAuth}
-                    />
-
-                </Aux>
-            orderSummary = 
-                <OrderSummary 
-                    purchaseClick={this.purchaseHandler} 
-                    cancelClick={this.modalCloseHandler} 
-                    price={this.props.total} 
-                    ingredients={this.props.ing}
-                /> 
-        }
-
-        if (this.props.loading){
-            orderSummary = <Spinner/>
-        }
-
-        return (
+    if (props.ing){
+        burgerMenu = 
             <Aux>
-                {burgerMenu}
-                <Modal 
-                    modalShow={this.state.modal}
-                    modalClose={this.modalCloseHandler}
-                    // loading={this.state.loading}    
-                >
-                    {orderSummary}
-                </Modal>
+                <Burger ingredients={props.ing} />
+                <BurgerControls 
+                    ingredients={props.ing} 
+                    addControl={props.addIng} 
+                    removeControl = {props.removeIng}
+                    price={props.total} 
+                    modal={modalHandler}
+                    auth={props.isAuth}
+                />
+
             </Aux>
-            
-        );
+        orderSummary = 
+            <OrderSummary 
+                purchaseClick={purchaseHandler} 
+                cancelClick={modalCloseHandler} 
+                price={props.total} 
+                ingredients={props.ing}
+            /> 
     }
+
+    if (props.loading){
+        orderSummary = <Spinner/>
+    }
+
+    return (
+        <Aux>
+            {burgerMenu}
+            <Modal
+                modalShow={modal}
+                modalClose={modalCloseHandler}
+                // loading={this.state.loading}    
+            >
+                {orderSummary}
+            </Modal>
+        </Aux>
+        
+    );
 }
 
 

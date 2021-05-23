@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -11,36 +11,31 @@ import Logout from './containers/Authentication/Logout/Logout';
 import * as actionCreators from './store/actionCreators/index';
 
 
-class App extends Component {
+const App = props => {
 
-  componentDidMount() {
-    this.props.onLogin()
-  }
+  useEffect(() => {
+    props.onLogin();
+  }, []); 
 
-  
-  render () {
-  
-    let routes = 
-      <Switch>
-        <Route exact path='/' component={BurgerBuilder} />
-        <Route path='/auth' component={Auth}/>
-        <Route path='/checkout' component={CheckoutBuilder}/>
-        <Route path='/orders' component={Orders}/>
-        <Route path='/logout' component={Logout}/>
-        <Redirect to='/'/>
-      </Switch>
+  let routes = 
+    <Switch>
+      <Route exact path='/' component={BurgerBuilder}/>
+      <Route path='/auth' component={Auth}/>
+      <Route path='/checkout' component={CheckoutBuilder}/>
+      <Route path='/orders' component={Orders}/>
+      <Route path='/logout' component={Logout}/>
+      <Redirect to='/'/>
+    </Switch>
 
-
-    return (
-      <div>
-        <BrowserRouter>
-          <Layout>
-            {routes}
-          </Layout>
-        </BrowserRouter>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <BrowserRouter>
+        <Layout>
+          {routes}
+        </Layout>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 const mapStateToProps = state => {

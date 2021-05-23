@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import { connect } from 'react-redux';
 
 import Button from '../../../components/UI/Button/Button';
@@ -8,10 +8,8 @@ import Input from '../../../components/Input/Input';
 import  * as actionCreators from '../../../store/actionCreators/index';
 
 
-class ContactData extends Component {
-
-    state={
-        contactForm:{
+const ContactData = props => {
+    const [contactForm, setContactForm] = useState({
             name: {
                 value:'',
                 elementType:'input',
@@ -80,12 +78,13 @@ class ContactData extends Component {
                     validation: {},
                     valid:false,
                     touched:false
-                },
-            },
-        formValid:false,
-    };
+            }
+        }
+    )
 
-    validHandler = (value, rules) => {
+    const [formValid, setFormValid] = useState(false)
+
+    const validHandler = (value, rules) => {
         let inputValid = true
         if (rules.required){
             inputValid = value.trim() !== '' && inputValid
@@ -99,50 +98,49 @@ class ContactData extends Component {
         return inputValid
     };
 
-    inputHandler = (event, inputElement) => {
-        const newForm = {...this.state.contactForm};
+    const inputHandler = (event, inputElement) => {
+        const newForm = {...contactForm};
         const newInput = {...newForm[inputElement]};
         newInput.value = event.target.value;
-        newInput.valid = this.validHandler(newInput.value, newInput.validation);
+        newInput.valid = validHandler(newInput.value, newInput.validation);
         newInput.touched = true;
         newForm[inputElement] = newInput;
         let formCheck = true
         for (let formElement in newForm){
             formCheck = newForm[formElement].valid && formCheck
         }
-        this.setState({contactForm: newForm, formValid: formCheck})
+        setContactForm(newForm);
+        setFormValid(formCheck);
     };
 
-    orderHandler = (event) => {
+    const orderHandler = (event) => {
         event.preventDefault();
         const customerData = {};
-        for (let index in this.state.contactForm){
-            customerData[index] = this.state.contactForm[index].value
+        for (let index in contactForm){
+            customerData[index] = contactForm[index].value
         }
 
         const order = {
-            ingredients: this.props.ing,
-            price: this.props.price,
+            ingredients: props.ing,
+            price: props.price,
             customer: customerData,
-            userId: this.props.userId
+            userId: props.userId
         }
-        this.props.postOrder(order, this.props.token);
+        props.postOrder(order, props.token);
         // axios.post('/orders.json', order)
         //     .then(response => {
-        //         this.setState({loading:false})
-        //         this.props.history.push('/')
+        //         setState({loading:false})
+        //         props.history.push('/')
         //     })
         //     .catch(error => {
-        //         this.setState({loading: false}) 
+        //         setState({loading: false}) 
         //     })
     };
 
-    render(){
-
         const formArr = []
 
-        for (let index in this.state.contactForm){
-            formArr.push({id: index, config: this.state.contactForm[index]})
+        for (let index in contactForm){
+            formArr.push({id: index, config: contactForm[index]})
         }
 
         const formInput = formArr.map(element => {
@@ -153,7 +151,7 @@ class ContactData extends Component {
                     name={element.id} 
                     value ={element.config.value} 
                     elementConfig={element.config.elementConfig}
-                    changed={(event) => this.inputHandler(event, element.id)}
+                    changed={(event) => inputHandler(event, element.id)}
                     invalid={!element.config.valid}
                     validation={element.config.validation}
                     touched={element.config.touched}
@@ -162,13 +160,13 @@ class ContactData extends Component {
         })
 
         let form = (
-            <form onSubmit={this.orderHandler}>
+            <form onSubmit={orderHandler}>
                 {formInput}
-                <Button disabled={!this.state.formValid} BtnType='Success'>ORDER</Button>
+                <Button disabled={!formValid} BtnType='Success'>ORDER</Button>
             </form>
         ); 
 
-        if (this.props.loading == true){
+        if (props.loading == true){
             form = <Spinner/>
         }
 
@@ -178,7 +176,6 @@ class ContactData extends Component {
                 {form}
             </div>
         )
-    }
 };
 
 const mapStateToProps = state => {
