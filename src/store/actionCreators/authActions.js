@@ -43,6 +43,7 @@ export const authThunk = (email, password, signedIn) => {
                 dispatch(checkTimeout(response.data.expiresIn))
             })
             .catch(err => {
+                console.log(err)
                 dispatch(authFailed(err.response.data.error))
             })
     }

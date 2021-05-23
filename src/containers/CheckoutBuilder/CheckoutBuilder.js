@@ -24,8 +24,8 @@ const CheckoutBuilder = props => {
                 {purchaseRedirect}
                 <CheckoutSummary 
                     ingredients={props.ing} 
-                    clickedCancel={this.checkoutCancel} 
-                    clickedSuccess={this.checkoutContinue}/>
+                    clickedCancel={checkoutCancel} 
+                    clickedSuccess={checkoutContinue}/>
                 <Route path={`${props.match.url}/contactdata`} component={ContactData}/>
             </div>                    
     }

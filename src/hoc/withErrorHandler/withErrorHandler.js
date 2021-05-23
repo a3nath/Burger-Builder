@@ -4,25 +4,31 @@ import Modal from '../../components/UI/Modal/Modal';
 import Aux from '../Aux/Aux';
 
 
-const WithErrorHandler = (WrappedComponent, axios, props) => {
+const withErrorHandler = (WrappedComponent, axios) => {
+
+    return props => {
 
     const [error, setError] = useState(null);
+
     const IntReq = axios.interceptors.request.use(req => {
-                setError(null);
-                return req;
+            setError(null);
+            return req;
         }
     );
 
     const IntRes = axios.interceptors.response.use(res => res, err => {
-                setError({err}
-    )})
+            setError(err)
+        }
+    );
 
     useEffect(() => {
-        axios.interceptors.request.eject(IntReq);
-        axios.interceptors.request.eject(IntRes);
-    }, [])    
+        //cleanup work
+        return () => {
+            axios.interceptors.request.eject(IntReq);
+            axios.interceptors.request.eject(IntRes);
+        }
+    }, [IntReq, IntRes])    
         
-
     const errorConfirmedHandler = () => {
         setError(null)
     }
@@ -50,7 +56,8 @@ const WithErrorHandler = (WrappedComponent, axios, props) => {
                 <WrappedComponent {...props}/>
             </Aux>
         )
+    }
 }
 
 
-export default WithErrorHandler;
+export default withErrorHandler;
