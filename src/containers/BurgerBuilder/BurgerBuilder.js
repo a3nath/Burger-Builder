@@ -16,7 +16,7 @@ import * as actionCreators from '../../store/actionCreators/index';
 const BurgerBuilder = props => {
 
     const [modal, setModal] = useState(false)
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
   
     const modalHandler = () => {
         if (props.isAuth) {
