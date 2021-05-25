@@ -13,9 +13,11 @@ import * as actionCreators from './store/actionCreators/index';
 
 const App = props => {
 
+  const {onLogin} = props
+
   useEffect(() => {
-    props.onLogin();
-  }, []); 
+    onLogin();
+  }, [onLogin]); 
 
   let routes = 
     <Switch>

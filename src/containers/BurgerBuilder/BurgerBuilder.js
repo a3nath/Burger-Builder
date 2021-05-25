@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from '../../axios-orders'
 
@@ -35,10 +35,12 @@ const BurgerBuilder = props => {
     const purchaseHandler =() => {
         props.purchaseStart()
     };
+ 
+    const {iniIng} = props
 
     useEffect(() => {
-        props.iniIng()
-    }, [])
+       iniIng()
+    }, [iniIng])
 
     let burgerMenu = <Spinner/>
     let orderSummary = null

@@ -80,11 +80,13 @@ const AuthData = props => {
         setSignIn(!isSignIn)
     };
 
+    const {burgerBuild, redirPath, authRedirHome} = props
+
     useEffect(() => {
-        if(!props.burgerBuild && props.redirPath !== '/'){
-                    props.authRedir()
+        if(!burgerBuild && redirPath !== '/'){
+                    authRedirHome()
                 }
-    })
+    }, [burgerBuild, redirPath, authRedirHome])
 
     const formArr = []
 
@@ -115,7 +117,7 @@ const AuthData = props => {
         </form>
     ); 
 
-    if (props.loading == true){
+    if (props.loading === true){
         form = <Spinner/>
     }
 
@@ -157,7 +159,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return{
         auth: (email, password, signedIn) => dispatch(actionCreators.authThunk(email, password, signedIn)),
-        authRedir: () => dispatch(actionCreators.authRedirect('/'))
+        authRedirHome: () => dispatch(actionCreators.authRedirect('/'))
     }
 };
 

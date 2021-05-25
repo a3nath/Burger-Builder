@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 
 import Order from '../../components/Order/Order';
@@ -9,21 +9,30 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 const Orders = props => {
 
-    useEffect(() => {
-        props.getOrders(props.token, props.userId)
-    }, [])
-   
-            let orderArr = props.ordersData.map(order => (<Order price={+order.price} ingredients={order.ingredients} key={order.id}/>
-        ))
-            if (props.loading) {
-                orderArr = <Spinner/>
-        }
+    const {token, userId, getOrders} = props
 
-        return(
-            <div>
-                {orderArr}
-            </div>
-        )
+    useEffect(() => {
+        getOrders(token, userId)
+        }, [token, userId, getOrders]
+    )
+   
+    let orderArr = props.ordersData.map(order => (
+        <Order 
+            price={+order.price} 
+            ingredients={order.ingredients} 
+            key={order.id}
+        />
+    ))
+
+    if (props.loading) {
+        orderArr = <Spinner/>
+    }
+
+    return(
+        <div>
+            {orderArr}
+        </div>
+    )
 }
 
 const mapStateToProps = state => {

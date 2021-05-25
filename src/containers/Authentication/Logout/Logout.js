@@ -7,9 +7,10 @@ import * as actionTypes from '../../../store/actionTypes'
 
 const Logout = props => {
 
+    const {onLogout} = props
     useEffect(() => {
-        props.onLogout()
-    }, [])
+        onLogout()
+    }, [onLogout])
 
     return(
         <Redirect to='/'/>

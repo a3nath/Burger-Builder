@@ -166,7 +166,7 @@ const ContactData = props => {
             </form>
         ); 
 
-        if (props.loading == true){
+        if (props.loading === true){
             form = <Spinner/>
         }
 
