@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Layout from './components/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import CheckoutBuilder from './containers/CheckoutBuilder/CheckoutBuilder';
-import Orders from './containers/Orders/Orders';
-import Auth from './containers/Authentication/Auth';
-import Logout from './containers/Authentication/Logout/Logout';
 import * as actionCreators from './store/actionCreators/index';
 
 
@@ -18,6 +14,12 @@ const App = props => {
   useEffect(() => {
     onLogin();
   }, [onLogin]); 
+
+  const Orders = React.lazy(() => import('./containers/Orders/Orders'))
+  const CheckoutBuilder = React.lazy(() => import('./containers/CheckoutBuilder/CheckoutBuilder'))
+  const Auth = React.lazy(() => import('./containers/Authentication/Auth'))
+  const Logout = React.lazy(() => import('./containers/Authentication/Logout/Logout'))
+  
 
   let routes = 
     <Switch>
