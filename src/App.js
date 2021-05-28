@@ -1,6 +1,7 @@
-import React, { lazy, useEffect } from 'react';
+import React, {Suspense, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Spinner from '../src/components/UI/Spinner/Spinner';
 
 import Layout from './components/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
@@ -19,12 +20,11 @@ const App = props => {
   const CheckoutBuilder = React.lazy(() => import('./containers/CheckoutBuilder/CheckoutBuilder'))
   const Auth = React.lazy(() => import('./containers/Authentication/Auth'))
   const Logout = React.lazy(() => import('./containers/Authentication/Logout/Logout'))
-  
 
   let routes = 
     <Switch>
       <Route exact path='/' component={BurgerBuilder}/>
-      <Route path='/auth' component={Auth}/>
+      <Route path='/auth'><Auth/></Route>
       <Route path='/checkout' component={CheckoutBuilder}/>
       <Route path='/orders' component={Orders}/>
       <Route path='/logout' component={Logout}/>
@@ -35,7 +35,9 @@ const App = props => {
     <div>
       <BrowserRouter>
         <Layout>
-          {routes}
+          <Suspense fallback={<Spinner/>}>
+            {routes}  
+          </Suspense>
         </Layout>
       </BrowserRouter>
     </div>
