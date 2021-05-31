@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './BurgerControl.module.css'
+import classes from './BurgerControls.module.css'
 import BurgerControl from './BurgerControl/BurgerControl';
 import OrderBtn from '../Order/OrderBtn';
 
