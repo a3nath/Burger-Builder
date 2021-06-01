@@ -16,7 +16,7 @@ const AuthData = props => {
             elementType:'input',
             elementConfig: {
                 type: 'email',
-                placeholder: 'Your Email'
+                placeholder: 'Email'
             },
             validation: {
                 required:true
@@ -29,7 +29,7 @@ const AuthData = props => {
             elementType:'input',
             elementConfig: {
                 type: 'password',
-                placeholder: 'Your Password'
+                placeholder: 'Password'
             },
             validation: {
                 required:true,
