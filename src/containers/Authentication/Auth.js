@@ -10,7 +10,20 @@ import { Redirect } from 'react-router';
 
 const AuthData = props => {
     
-    const [authForm, setAuthForm] = useState({
+    const [signupForm, setSignupForm] = useState({
+        name:{
+            value:'',
+            elementType:'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'Name'
+            },
+            validation: {
+                required:true
+            },
+            valid:false,
+            touched:false
+        },
         email: {
             value:'',
             elementType:'input',
@@ -38,11 +51,41 @@ const AuthData = props => {
             valid:false,
             touched:false
         },
-    })
+    });
 
-    // const [formValid, setFormValid] = useState(false)
-    const [isSignIn, setSignIn] = useState(true)
+    const [loginForm, setLoginForm] = useState({
+        email: {
+            value:'',
+            elementType:'input',
+            elementConfig: {
+                type: 'email',
+                placeholder: 'Email'
+            },
+            validation: {
+                required:true
+            },
+            valid:false,
+            touched:false
+        },
+        password: {
+            value:'',
+            elementType:'input',
+            elementConfig: {
+                type: 'password',
+                placeholder: 'Password'
+            },
+            validation: {
+                required:true,
+                MinLen: 7
+            },
+            valid:false,
+            touched:false
+        },
+    });
 
+    const [isLogin, setIsLogin] = useState(true)
+
+    //error checking helper for form
     const validHandler = (value, rules) => {
         let inputValid = true
         if (rules.required){
@@ -57,6 +100,7 @@ const AuthData = props => {
         return inputValid
     };
 
+    //error checking for input
     const inputHandler = (event, inputElement) => {
         const newForm = {...authForm};
         const newInput = {...newForm[inputElement]};
@@ -68,33 +112,38 @@ const AuthData = props => {
         // for (let formElement in newForm){
         //     formCheck = newForm[formElement].valid && formCheck
         // }
-        setAuthForm(newForm)
+        setLoginForm(newForm)
     }; 
 
+    //submit form values
     const submitHandler = (event) => {
         event.preventDefault();
         props.auth(authForm.email.value, authForm.password.value, isSignIn)
     };
 
+    //
     const toggleSignIn = () => {
-        setSignIn(!isSignIn)
+        setIsLogin(!isLogin)
     };
 
     const {burgerBuild, redirPath, authRedirHome} = props
 
     useEffect(() => {
-        if(!burgerBuild && redirPath !== '/'){
-                    authRedirHome()
-                }
-    }, [burgerBuild, redirPath, authRedirHome])
+        if(!burgerBuild && redirPath !== '/')
+        {
+            authRedirHome()}
+        }, [burgerBuild, redirPath, authRedirHome]
+    )
 
-    const formArr = []
+    //setting up sign up form
 
-    for (let index in authForm){
-        formArr.push({id: index, config: authForm[index]})
+    const signupArr = []
+
+    for (let index in SignupForm){
+        formArr.push({id: index, config: SignupForm[index]})
     }
 
-    const formInput = formArr.map(element => {
+    const formInput = signupArr.map(element => {
         return(
             <Input 
                 key={element.id} 
@@ -110,15 +159,59 @@ const AuthData = props => {
         )
     })
 
-    let form = (
+    let formWrapper = (
+        <div>
+        <h4>
+            Sign up
+        </h4>
         <form onSubmit={submitHandler}>
             {formInput}
             <Button BtnType='Success'>Submit</Button>
         </form>
+        <a></a>
+        </div>
     ); 
 
+    //login form
+
+    const loginArr = []
+
+    for (let index in LoginForm){
+        formArr.push({id: index, config: SignupForm[index]})
+    }
+
+    const formInput = signupArr.map(element => {
+        return(
+            <Input 
+                key={element.id} 
+                inputType= {element.config.elementType} 
+                name={element.id} 
+                value ={element.config.value} 
+                elementConfig={element.config.elementConfig}
+                changed={(event) => inputHandler(event, element.id)}
+                invalid={!element.config.valid}
+                validation={element.config.validation}
+                touched={element.config.touched}
+            />
+        )
+    })
+
+    //
+
+    if (!isSignIn) {
+        formWrapper = 
+        <div>
+            <h4>Enter Login data</h4>
+            <form onSubmit={submitHandler}>
+                {formInput}
+                <Button BtnType='Success'>Submit</Button>
+            </form>
+            <a></a>
+        </div>    
+    }
+
     if (props.loading === true){
-        form = <Spinner/>
+        formWrapper = <Spinner/>
     }
 
     let errorMess = null;
@@ -133,13 +226,13 @@ const AuthData = props => {
         authRedir = <Redirect to={props.redirPath}/>
     }
 
+
+
     return(
         <div className={classes.AuthData}>
             {errorMess}
             {authRedir}
-            <h4>Enter Login data</h4>
-            {form}
-            <Button BtnType='Danger' clicked={toggleSignIn}>SWITCH to {isSignIn ? "Sign Up" : "Sign In"}</Button>
+            {formWrapper}
         </div>
     )
 };
