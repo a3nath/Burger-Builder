@@ -9,7 +9,7 @@
     box-shadow: 0 0 0 7px #e7a881 inset;
 }
 
-.Button:hover{
+.Button:hover {
     background-color: #df8a56;
     box-shadow: 0 0 0 7px #df8a56 inset;
     border: 1px solid;
@@ -18,5 +18,12 @@
 .Ing{
     text-transform: capitalize;
     font-size: 1rem;
-    
+}
+
+.Button:disabled{
+    border:none;
+    background-color: #e7a881;
+    box-shadow: 0 0 0 7px #e7a881 inset;
+    cursor: not-allowed;
+
 }
