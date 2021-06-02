@@ -53,6 +53,8 @@ const AuthData = props => {
         },
     });
 
+    const [isSignup, setIsSignup] = useState(true)
+
     const [loginForm, setLoginForm] = useState({
         email: {
             value:'',
@@ -83,7 +85,7 @@ const AuthData = props => {
         },
     });
 
-    const [isLogin, setIsLogin] = useState(true)
+    const [isLogin, setIsLogin] = useState(false)
 
     //error checking helper for form
     const validHandler = (value, rules) => {
@@ -102,7 +104,7 @@ const AuthData = props => {
 
     //error checking for input
     const inputHandler = (event, inputElement) => {
-        const newForm = {...authForm};
+        const newForm = {...formName};
         const newInput = {...newForm[inputElement]};
         newInput.value = event.target.value;
         newInput.valid = validHandler(newInput.value, newInput.validation);
@@ -112,38 +114,84 @@ const AuthData = props => {
         // for (let formElement in newForm){
         //     formCheck = newForm[formElement].valid && formCheck
         // }
-        setLoginForm(newForm)
+        setForm(newForm)
     }; 
 
     //submit form values
     const submitHandler = (event) => {
         event.preventDefault();
-        props.auth(authForm.email.value, authForm.password.value, isSignIn)
+        // props.auth(authForm.email.value, authForm.password.value, isSignIn)
     };
 
     //
     const toggleSignIn = () => {
         setIsLogin(!isLogin)
+        setIsSignup(!isSignup)
     };
 
     const {burgerBuild, redirPath, authRedirHome} = props
 
     useEffect(() => {
-        if(!burgerBuild && redirPath !== '/')
-        {
-            authRedirHome()}
+            if(!burgerBuild && redirPath !== '/')
+            {
+                authRedirHome()
+            }
         }, [burgerBuild, redirPath, authRedirHome]
     )
 
-    //setting up sign up form
+    // useEffect(() => {
+    //         if (!isLogin) 
+    //         {   formArr = []
+    //             formName = loginForm
+    //             setForm = setLoginForm
 
-    const signupArr = []
+    //             for (let index in formName){
+    //                 formArr.push({id: index, config: formName[index]})
+    //             }
+            
+    //             let formInput = formArr.map(element => {
+    //                 return(
+    //                     <Input 
+    //                         key={element.id} 
+    //                         inputType= {element.config.elementType} 
+    //                         name={element.id} 
+    //                         value ={element.config.value} 
+    //                         elementConfig={element.config.elementConfig}
+    //                         changed={(event) => inputHandler(event, element.id)}
+    //                         invalid={!element.config.valid}
+    //                         validation={element.config.validation}
+    //                         touched={element.config.touched}
+    //                     />
+    //                 )
+    //             })
 
-    for (let index in SignupForm){
-        formArr.push({id: index, config: SignupForm[index]})
+    //             formWrapper = 
+    //                 <div>
+    //                     <h4>Enter Login data</h4>
+    //                     <form onSubmit={submitHandler}>
+    //                         {formInput}
+    //                         <Button BtnType='Success'>Submit</Button>
+    //                     </form>
+    //                     <p>Dont have an account?<a onClick={setIsLogin(false), setIsSignup(true)}>Sign up</a></p>
+    //                 </div>    
+    //         }
+    //         else{
+
+    //         }
+    //     }, [isLogin, loginForm, toggleSignIn]
+    // )
+
+    //setting up  form
+
+    let formArr = []
+    let formName = signupForm
+    let setForm = setSignupForm
+    
+    for (let index in formName){
+        formArr.push({id: index, config: formName[index]})
     }
 
-    const formInput = signupArr.map(element => {
+    let formInput = formArr.map(element => {
         return(
             <Input 
                 key={element.id} 
@@ -168,19 +216,22 @@ const AuthData = props => {
             {formInput}
             <Button BtnType='Success'>Submit</Button>
         </form>
-        <a></a>
+        <p>Already have account?<a onClick={toggleSignIn}>Sign in</a></p>
         </div>
     ); 
 
-    //login form
 
-    const loginArr = []
+    if (isLogin) 
+            {  
+                formArr = []
+                formName = loginForm
+                setForm = setLoginForm
 
-    for (let index in LoginForm){
-        formArr.push({id: index, config: SignupForm[index]})
-    }
+                for (let index in formName){
+                    formArr.push({id: index, config: formName[index]})
+                }
 
-    const formInput = signupArr.map(element => {
+                formInput = formArr.map(element => {
         return(
             <Input 
                 key={element.id} 
@@ -196,19 +247,32 @@ const AuthData = props => {
         )
     })
 
-    //
-
-    if (!isSignIn) {
-        formWrapper = 
-        <div>
-            <h4>Enter Login data</h4>
-            <form onSubmit={submitHandler}>
-                {formInput}
-                <Button BtnType='Success'>Submit</Button>
-            </form>
-            <a></a>
-        </div>    
-    }
+                formInput =  formArr.map(element => {
+                    return(
+                        <Input 
+                            key={element.id} 
+                            inputType= {element.config.elementType} 
+                            name={element.id} 
+                            value ={element.config.value} 
+                            elementConfig={element.config.elementConfig}
+                            changed={(event) => inputHandler(event, element.id)}
+                            invalid={!element.config.valid}
+                            validation={element.config.validation}
+                            touched={element.config.touched}
+                        />
+                    )
+                })
+                formWrapper = 
+                            <div>
+                                <h4>Enter Login data</h4>
+                                <form onSubmit={submitHandler}>
+                                    {formInput}
+                                    <Button BtnType='Success'>Submit</Button>
+                                </form>
+                                <p>Dont have an account?<a onClick={toggleSignIn}>Sign up</a></p>
+                            </div>    
+                
+            }             
 
     if (props.loading === true){
         formWrapper = <Spinner/>
@@ -225,8 +289,6 @@ const AuthData = props => {
     if (props.isAuth){
         authRedir = <Redirect to={props.redirPath}/>
     }
-
-
 
     return(
         <div className={classes.AuthData}>
