@@ -29,7 +29,8 @@ export const checkTimeout = (time) => {
 export const authThunk = (email, password, signedIn) => {
     return dispatch => {
         dispatch(authStart());
-        const userCred = {email:email, password:password, returnSecureToken:true}
+        let userCred = {email:email, password:password, returnSecureToken:true}
+  
         let url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCwiiR8Y8atJBrXaGqHBuYEyeU9IjELKz8"
         if (!signedIn) {
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwiiR8Y8atJBrXaGqHBuYEyeU9IjELKz8'
