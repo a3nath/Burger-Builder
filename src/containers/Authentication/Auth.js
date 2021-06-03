@@ -8,6 +8,7 @@ import Input from '../../components/Input/Input';
 import  * as actionCreators from '../../store/actionCreators/index';
 import { Redirect } from 'react-router';
 import Modal from '../../components/UI/Modal/Modal'
+import AuthErr from '../../components/AuthErr/AuthErr';
 
 const AuthData = props => {
     
@@ -88,6 +89,9 @@ const AuthData = props => {
 
     const [isLogin, setIsLogin] = useState(false)
 
+    const [modal, setModal] = useState(false)
+
+
     //error checking helper for form
     const validHandler = (value, rules) => {
         let inputValid = true
@@ -123,16 +127,26 @@ const AuthData = props => {
         event.preventDefault();
         if (isLogin){
             props.auth(loginForm.email.value, loginForm.password.value, isLogin)
-           
+            setModal(true)
+            // errMess = props.error.message
+            // console.log(errMess)
         }
-        else if (!isLogin){
+        else if (!isLogin && props.error){
+            props.auth(signupForm.email.value, signupForm.password.value, isLogin)
+            setModal(true)
+            // errMess = props.error.message
+            // console.log(errMess)
+            // console.log(props.error.message)
+        }
+        else if (isLogin) {
+            props.auth(loginForm.email.value, loginForm.password.value, isLogin)
+        }
+        else {
             props.auth(signupForm.email.value, signupForm.password.value, isLogin)
         }
     };
 
-  
-
-    //
+    //toggling between login sign up
     const toggleSignIn = () => {
         setIsLogin(!isLogin)
         setIsSignup(!isSignup)
@@ -229,22 +243,35 @@ const AuthData = props => {
         formWrapper = <Spinner/>
     }
 
-    let errMess = null
-    if (props.error){
-        errMess = <p>{props.error.message}</p>
+    // let errorMess = null;
+
+    const modalCloseHandler = () => {
+        setModal(false)
     }
-   
+
     let authRedir = null;
     if (props.isAuth){ 
         authRedir = <Redirect to={props.redirPath}/>
     }
 
+    let errModal = null;
 
+    if (props.error){
+        errModal = <AuthErr errMess={props.error.message} />
+    }
+
+    
     return(
         <div className={classes.AuthData}>
             {authRedir}
             {formWrapper}
-            {errMess}
+            <Modal
+                modalShow={modal}
+                modalClose={modalCloseHandler}
+            >        
+                {errModal}      
+
+            </Modal>
         </div>
     )
 };
