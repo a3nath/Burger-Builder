@@ -2,13 +2,13 @@ import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 
 import Button from '../../components/UI/Button/Button';
-import classes from './Auth.module.css';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/Input/Input';
 import  * as actionCreators from '../../store/actionCreators/index';
 import { Redirect } from 'react-router';
 import Modal from '../../components/UI/Modal/Modal'
 import AuthErr from '../../components/AuthErr/AuthErr';
+import classes from './Auth.module.css';
 
 const AuthData = props => {
     
@@ -193,9 +193,9 @@ const AuthData = props => {
         <h4>
             Sign up
         </h4>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} className={classes.authForm}>
             {formInput}
-            <Button BtnType='Success'>Submit</Button>
+            <Button className ={classes.Button} >Submit</Button>
         </form>
         <p>Already have account?<a onClick={toggleSignIn}>Sign in</a></p>
         </div>
@@ -230,9 +230,9 @@ const AuthData = props => {
             formWrapper = 
                 <div>
                     <h4>Enter Login data</h4>
-                    <form onSubmit={submitHandler}>
+                    <form onSubmit={submitHandler} className={classes.authForm}>
                         {formInput}
-                        <Button BtnType='Success'>Submit</Button>
+                        <Button className ={classes.Button} >Submit</Button>
                     </form>
                     <p>Dont have an account?<a onClick={toggleSignIn}>Sign up</a></p>
                 </div>    

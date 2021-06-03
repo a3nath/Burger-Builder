@@ -2,7 +2,6 @@
     margin: 20px auto;
     width: 80%;
     text-align: center;
-    border: solid 1px;
     padding: 20px;
 }
 
@@ -19,4 +18,37 @@
     .AuthData {
         width: 500px;
     }
+}
+
+.authForm{
+    background-color: #5767df;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 440px;
+    width: 400px;
+    color: white;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.25);
+    transition: 
+      opacity .3s ease-in .3s,
+      visibility .3s ease-in .3s;
+    transform: scale(.9);
+}
+
+
+.Button {
+    padding: 10px;
+    margin:0px 3px 10px 3px ;
+    border-radius: 10px;
+    background-color: #e7a881;
+    box-sizing: border-box;
+    border:1px solid lightcoral;
+    box-shadow: 0 0 0 7px #e7a881 inset;
+}
+
+.Button:hover {
+    background-color: #df8a56;
+    box-shadow: 0 0 0 7px #df8a56 inset;
+    border: 1px solid;
 }
