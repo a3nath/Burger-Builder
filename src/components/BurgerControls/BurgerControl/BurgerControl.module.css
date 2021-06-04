@@ -1,5 +1,5 @@
 
-.Button {
+.burgerButton {
     padding: 10px;
     margin:0px 3px 10px 3px ;
     border-radius: 10px;
@@ -9,7 +9,7 @@
     box-shadow: 0 0 0 7px #e7a881 inset;
 }
 
-.Button:hover {
+.burgerButton:hover {
     background-color: #df8a56;
     box-shadow: 0 0 0 7px #df8a56 inset;
     border: 1px solid;

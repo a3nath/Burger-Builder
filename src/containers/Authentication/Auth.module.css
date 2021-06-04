@@ -23,7 +23,6 @@
 }
 
 .authForm{
-   
     padding-top: 20px;
     padding-bottom: 20px;
     height: 300px;
@@ -35,19 +34,26 @@
     transform: scale(.9);
 }
 
-
-.Button {
+.submitButton {
     padding: 10px;
-    margin:0px 3px 10px 3px ;
-    border-radius: 10px;
-    background-color: #e7a881;
+    border-radius: 5px;
+    background-color: #5767df;
     box-sizing: border-box;
-    border:1px solid lightcoral;
-    box-shadow: 0 0 0 7px #e7a881 inset;
+    border:1px solid #2c40d7;
+    box-shadow: 0 0 0 7px #5767df inset;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #fff;
+    padding: 10px;
+    margin: 10px 0px;
+    width: 70%;
+    height: 50px;
 }
 
-.Button:hover {
-    background-color: #df8a56;
-    box-shadow: 0 0 0 7px #df8a56 inset;
-    border: 1px solid;
+.submitButton:hover {
+    background-color: #2c40d7;
+    box-shadow: 0 0 0 7px #2c40d7 inset;
+    border: 1px solid #2c40d7;
+    color: #fff;
 }

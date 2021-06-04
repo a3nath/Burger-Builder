@@ -1,19 +1,15 @@
 .Button { 
-    color: white;
     outline: none;
     cursor: pointer;
     font: inherit;
     font-weight: bold;
-    padding: 10px;
-    margin:0px 3px 10px 3px ;
-    border-radius: 10px;
     box-sizing: border-box;
 }
 
-.Button:first-of-type {
+/* .Button:first-of-type {
     margin-left: 0;
     padding-left: 0;
-}
+} */
 
 .Success {
     background-color: green;
@@ -27,9 +23,10 @@
     color:#ccc;
     cursor: none;
 }
-
+/* 
 .Button:hover {
     background-color: #df8a56;
     box-shadow: 0 0 0 7px #df8a56 inset;
     border: 1px solid;
-}
+} */
+

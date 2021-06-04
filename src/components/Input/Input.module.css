@@ -3,15 +3,20 @@
     padding: 10px;
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .Label{
     font-weight: bold;
     display: block;
-    margin: 8px 15px;
-    width: 20%;
+    margin: 8px 0px;
+    width: 80%;
     text-transform: capitalize;
     text-align: left;
+    color: #000;
+    padding: 5px 10px;
 }
 
 .InputElement{
@@ -21,6 +26,7 @@
     font: inherit;
     padding: 6px 10px;
     width: 80%;
+    box-sizing: border-box;
 }
 
 .InputElement:focus{
@@ -33,3 +39,4 @@
     border: solid salmon;
     background-color: salmon;
 }
+

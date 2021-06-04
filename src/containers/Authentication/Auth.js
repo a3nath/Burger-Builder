@@ -190,12 +190,12 @@ const AuthData = props => {
 
     let formWrapper = (
         <div>
-        <h4>
+        <h1>
             Sign up
-        </h4>
+        </h1>
         <form onSubmit={submitHandler} className={classes.authForm}>
             {formInput}
-            <Button className ={classes.Button} >Submit</Button>
+            <button className={classes.submitButton}>Signup</button>
         </form>
         <p>Already have account?<a onClick={toggleSignIn}>Sign in</a></p>
         </div>
@@ -229,10 +229,10 @@ const AuthData = props => {
 
             formWrapper = 
                 <div>
-                    <h4>Enter Login data</h4>
+                    <h1>Login</h1>
                     <form onSubmit={submitHandler} className={classes.authForm}>
                         {formInput}
-                        <Button className ={classes.Button} >Submit</Button>
+                        <button className={classes.submitButton}>Login</button>
                     </form>
                     <p>Dont have an account?<a onClick={toggleSignIn}>Sign up</a></p>
                 </div>    
