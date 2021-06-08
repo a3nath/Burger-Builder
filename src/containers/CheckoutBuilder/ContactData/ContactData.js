@@ -15,7 +15,7 @@ const ContactData = props => {
                 elementType:'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Your Name'
+                    placeholder: 'Jane Doe'
                 },
                 validation: {
                     required:true,
@@ -30,7 +30,7 @@ const ContactData = props => {
                 elementType:'input',
                 elementConfig: {
                     type: 'email',
-                    placeholder: 'Your Email'
+                    placeholder: 'you@hello.com'
                 },
                 validation: {
                     required:true
@@ -43,7 +43,7 @@ const ContactData = props => {
                 elementType:'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Your Address'
+                    placeholder: '65 Front Street W, Toronto'
                 },
                 validation: {
                     required:true,
@@ -56,7 +56,7 @@ const ContactData = props => {
                 elementType:'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Your Postal Code'
+                    placeholder: 'M5J1E6'
                 },
                 validation: {
                     required:true,
@@ -160,7 +160,7 @@ const ContactData = props => {
         })
 
         let form = (
-            <form onSubmit={orderHandler}>
+            <form onSubmit={orderHandler} className={classes.contactForm}>
                 {formInput}
                 <Button disabled={!formValid} BtnType='Success'>ORDER</Button>
             </form>
@@ -171,8 +171,9 @@ const ContactData = props => {
         }
 
         return(
-            <div className={classes.ContactData}>
-                <h4>Enter Contact data</h4>
+            <div className={classes.contactData}>
+                <h2>Contact data</h2>
+                <hr/>
                 {form}
             </div>
         )

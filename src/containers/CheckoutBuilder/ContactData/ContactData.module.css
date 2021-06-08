@@ -1,8 +1,21 @@
-.ContactData {
-    margin: 20px auto;
-    width: 80%;
+.contactData {
+    margin: 80px auto 20px auto;
+    width: 60%;
     text-align: center;
     border: solid 1px;
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.25);
+}
+
+.contactForm{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    transition: 
+      opacity .3s ease-in .3s,
+      visibility .3s ease-in .3s;
+    transform: scale(.9);
 }
 
 .Input {
@@ -14,7 +27,7 @@
     color:red;
 }
 
-@media (min-width: 600px) {
+@media (max-width: 600px) {
     .ContactData {
         width: 500px;
     }

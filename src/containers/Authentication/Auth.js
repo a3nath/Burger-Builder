@@ -264,7 +264,7 @@ const AuthData = props => {
 
     
     return(
-        <div className={classes.AuthData}>
+        <div className={classes.authData}>
             {authRedir}
             {formWrapper}
             <Modal
