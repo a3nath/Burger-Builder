@@ -1,6 +1,5 @@
 .Button { 
     outline: none;
-    cursor: pointer;
     font: inherit;
     font-weight: bold;
     box-sizing: border-box;
@@ -17,6 +16,12 @@
 
 .Success {
     background-color: green;
+   
+}
+
+.Success:disabled{
+    background-color: lightgray;
+    color:green;
 }
 
 .Danger {
