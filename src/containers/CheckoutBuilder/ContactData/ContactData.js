@@ -113,6 +113,11 @@ const ContactData = props => {
         setFormValid(formCheck);
     };
 
+    // function sucNotify(){
+    //     new Notification("Success")
+    // }
+
+    
     const orderHandler = (event) => {
         event.preventDefault();
         const customerData = {};
@@ -127,14 +132,7 @@ const ContactData = props => {
             userId: props.userId
         }
         props.postOrder(order, props.token);
-        // axios.post('/orders.json', order)
-        //     .then(response => {
-        //         setState({loading:false})
-        //         props.history.push('/')
-        //     })
-        //     .catch(error => {
-        //         setState({loading: false}) 
-        //     })
+        
     };
 
         const formArr = []
