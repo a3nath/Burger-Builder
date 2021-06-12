@@ -23,9 +23,11 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
     useEffect(() => {
         //cleanup work
+        let isMounted = true;
         return () => {
             axios.interceptors.request.eject(IntReq);
             axios.interceptors.request.eject(IntRes);
+            isMounted = false;
         }
     }, [IntReq, IntRes])    
         

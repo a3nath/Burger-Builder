@@ -1,6 +1,5 @@
 .authData {
     margin: 20px auto;
-    width: 40%;
     text-align: center;
     padding: 20px;
     border-radius: 2px;
@@ -14,12 +13,6 @@
 .Disabled{
     background-color:#ccc;
     color:red;
-}
-
-@media (min-width: 600px) {
-    .AuthData {
-        width: 500px;
-    }
 }
 
 .authForm{
@@ -86,4 +79,22 @@ hr {
     height: 1px;
     opacity: .3;
     background: linear-gradient(to right, silver, black, silver)
+}
+
+
+@media (min-width: 900px){
+    .authData{width: 40%;}
+}
+
+@media (max-width: 900px){
+    .authData{width: 50%;}
+}
+
+
+@media (max-width: 650px){
+    .authData{width: 60%;}
+}
+
+@media (max-width: 400px){
+    .authData{width: 100%;}
 }

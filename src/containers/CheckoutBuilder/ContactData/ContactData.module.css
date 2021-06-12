@@ -27,8 +27,15 @@
     color:red;
 }
 
-@media (max-width: 600px) {
-    .ContactData {
-        width: 500px;
+@media (max-width: 650px) {
+    .contactData {
+        width: 80%;
     }
+}
+
+@media (max-width: 400px){
+    .contactData{
+        width: 98%; 
+        padding: 0;
+        margin: auto 0;    }
 }
