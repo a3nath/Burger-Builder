@@ -47,8 +47,7 @@ const BurgerBuilder = props => {
 
     if (props.ing){
         burgerMenu = 
-            <Aux>
-                <Burger ingredients={props.ing} />
+            <div class='burger-box'>
                 <BurgerControls 
                     ingredients={props.ing} 
                     addControl={props.addIng} 
@@ -57,8 +56,9 @@ const BurgerBuilder = props => {
                     modal={modalHandler}
                     auth={props.isAuth}
                 />
+                <Burger ingredients={props.ing} />
 
-            </Aux>
+            </div>
         orderSummary = 
             <OrderSummary 
                 purchaseClick={purchaseHandler} 
