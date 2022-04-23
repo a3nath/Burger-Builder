@@ -6,6 +6,7 @@ import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actionCreators from '../../store/actionCreators/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import classes from './Orders.module.css';
 
 const Orders = props => {
 
@@ -29,7 +30,7 @@ const Orders = props => {
     }
 
     return(
-        <div>
+        <div className={classes.orderContainer}>
             {orderArr}
         </div>
     )
