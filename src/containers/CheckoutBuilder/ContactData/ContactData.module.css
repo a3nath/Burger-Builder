@@ -6,6 +6,8 @@
     padding: 20px;
     border-radius: 2px;
     box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.25);
+    background-color: #e0e0e0;
+    color: #000;
 }
 
 .contactForm{
@@ -16,6 +18,11 @@
       opacity .3s ease-in .3s,
       visibility .3s ease-in .3s;
     transform: scale(.9);
+}
+
+.formHeader{
+    background-color: #5767df;
+    color: #fff;
 }
 
 .Input {

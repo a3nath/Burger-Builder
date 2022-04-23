@@ -170,7 +170,7 @@ const ContactData = props => {
 
         return(
             <div className={classes.contactData}>
-                <h2>Contact Data</h2>
+                <h2 className={classes.formHeader}>Contact Data</h2>
                 <hr/>
                 {form}
             </div>

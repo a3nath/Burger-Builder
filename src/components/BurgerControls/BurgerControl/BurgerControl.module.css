@@ -17,7 +17,7 @@
 
 .Ing{
     text-transform: capitalize;
-    font-size: 1rem;
+    font-size: inherit;
 }
 
 .Button:disabled{

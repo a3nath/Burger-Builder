@@ -10,6 +10,7 @@ import WithErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import OrderSummary from '../../components/Order/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actionCreators from '../../store/actionCreators/index';
+import classes from './BurgerBuilder.module.css';
 
 
 
@@ -45,9 +46,16 @@ const BurgerBuilder = props => {
     let burgerMenu = <Spinner/>
     let orderSummary = null
 
+    const intro =  
+        <div className={classes.Intro}>
+            <h1>Burger Builder</h1>
+            <h2 className={classes.subtitle}>Welcome to Burger Builder</h2>
+            <h3>Sign in, add topings to create your very own burger, press order to enter contact details and we will send the burger to your door!</h3>
+        </div>
+
     if (props.ing){
         burgerMenu = 
-            <div class='burger-box'>
+            <div className={classes.burgerBox}>
                 <BurgerControls 
                     ingredients={props.ing} 
                     addControl={props.addIng} 
@@ -57,7 +65,6 @@ const BurgerBuilder = props => {
                     auth={props.isAuth}
                 />
                 <Burger ingredients={props.ing} />
-
             </div>
         orderSummary = 
             <OrderSummary 
@@ -74,6 +81,7 @@ const BurgerBuilder = props => {
 
     return (
         <Aux>
+            {intro}
             {burgerMenu}
             <Modal
                 modalShow={modal}

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Aux from '../../hoc/Aux/Aux'
-import Button from '../UI/Button/Button'
+import Aux from '../../hoc/Aux/Aux';
+import Button from '../UI/Button/Button';
+import classes from './OrderSummary.module.css';
+
+
 
 const orderSummary = (props) => {
 
@@ -14,16 +17,18 @@ const orderSummary = (props) => {
 
     return(
         <Aux>
-            <h2>Your Amazing burger is readdy!</h2>
+            <div className={classes.modalBody}>
+            <h2 className={classes.modalHeader}>Your Amazing burger is readdy!</h2>
             <p>The ingredients are:</p>
-            <ul>
-                {ingArr}
-            </ul>
-            <p>Price: {props.price}</p>
-            <Link to={`/checkout/`}>
-                <Button clicked={props.purchaseClick} BtnType='Success'>Contine</Button>
-            </Link>
-            <Button clicked={props.cancelClick} BtnType='Danger'>Cancel</Button>
+                <ul>
+                    {ingArr}
+                </ul>
+                <p>Price: {props.price}</p>
+                <Link to={`/checkout/`}>
+                    <Button clicked={props.purchaseClick} BtnType='Success'>Contine</Button>
+                </Link>
+                <Button clicked={props.cancelClick} BtnType='Danger'>Cancel</Button>
+            </div>
         </Aux>
     )
 }
