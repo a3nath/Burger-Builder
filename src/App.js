@@ -1,5 +1,5 @@
 import React, {Suspense, useEffect } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Spinner from '../src/components/UI/Spinner/Spinner';
 
@@ -34,11 +34,13 @@ const App = props => {
   return (
     <div>
       <BrowserRouter>
+        <div>
         <Layout>
-          <Suspense fallback={<Spinner/>}>
+          <Suspense fallback={<Spinner/>}>'
             {routes}  
           </Suspense>
         </Layout>
+        </div>
       </BrowserRouter>
     </div>
   );
@@ -56,4 +58,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
