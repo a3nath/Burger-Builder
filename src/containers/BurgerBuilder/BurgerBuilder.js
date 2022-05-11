@@ -2,7 +2,7 @@ import React, {useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from '../../axios-orders'
 
-import Aux from '../../hoc/Aux/Aux';
+// import Aux from '../../hoc/Aux/Aux';
 import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/BurgerControls/BurgerControls';
 import Modal from '../../components/UI/Modal/Modal';
@@ -80,18 +80,16 @@ const BurgerBuilder = props => {
     }
 
     return (
-        <Aux>
+        <React.Fragment>
             {intro}
             {burgerMenu}
             <Modal
                 modalShow={modal}
-                modalClose={modalCloseHandler}
-                // loading={this.state.loading}    
+                modalClose={modalCloseHandler}   
             >
                 {orderSummary}
             </Modal>
-        </Aux>
-        
+        </React.Fragment>
     );
 }
 

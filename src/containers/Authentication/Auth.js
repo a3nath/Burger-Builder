@@ -115,10 +115,6 @@ const AuthData = props => {
         newInput.valid = validHandler(newInput.value, newInput.validation);
         newInput.touched = true;
         newForm[inputElement] = newInput;
-        // let formCheck = true
-        // for (let formElement in newForm){
-        //     formCheck = newForm[formElement].valid && formCheck
-        // }
         setForm(newForm)
     }; 
 
@@ -128,15 +124,10 @@ const AuthData = props => {
         if (isLogin){
             props.auth(loginForm.email.value, loginForm.password.value, isLogin)
             setModal(true)
-            // errMess = props.error.message
-            // console.log(errMess)
         }
         else if (!isLogin && props.error){
             props.auth(signupForm.email.value, signupForm.password.value, isLogin)
             setModal(true)
-            // errMess = props.error.message
-            // console.log(errMess)
-            // console.log(props.error.message)
         }
         else if (isLogin) {
             props.auth(loginForm.email.value, loginForm.password.value, isLogin)
@@ -272,7 +263,6 @@ const AuthData = props => {
                 modalClose={modalCloseHandler}
             >        
                 {errModal}      
-
             </Modal>
         </div>
     )

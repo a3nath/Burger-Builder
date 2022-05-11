@@ -113,11 +113,6 @@ const ContactData = props => {
         setFormValid(formCheck);
     };
 
-    // function sucNotify(){
-    //     new Notification("Success")
-    // }
-
-    
     const orderHandler = (event) => {
         event.preventDefault();
         const customerData = {};
