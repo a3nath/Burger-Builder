@@ -19,7 +19,9 @@ const order = (props) => {
             display: 'inline-block',
             margin: '0 8px',
             border: 'solid 1px',
-            padding: '2px'
+            padding: '2px',
+            'background-color':'#fff',
+            color:'#5767df'
         }}
        >{ing.name} {ing.amount}</span>
        )
