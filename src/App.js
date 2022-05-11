@@ -34,13 +34,11 @@ const App = props => {
   return (
     <div>
       <BrowserRouter>
-        <div>
         <Layout>
-          <Suspense fallback={<Spinner/>}>'
+          <Suspense fallback={<Spinner/>}>
             {routes}  
           </Suspense>
-        </Layout>
-        </div>
+        </Layout>  
       </BrowserRouter>
     </div>
   );
@@ -58,4 +56,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default connect(mapStateToProps, mapDispatchToProps)(App);
