@@ -1,11 +1,15 @@
 .Order{
-    width: 80%;
+    width: 90%;
     border: 2px solid #cce;
     box-shadow: 0 2px 4px #eee;
     padding: 10px;
-    margin: 2px auto;
+    margin: 3px auto;
     box-sizing: border-box;
     background-color: #5767df;
     color: #fff;
+}
 
+.OrderIngArr{
+    display: flex;
+    flex-wrap: wrap;
 }

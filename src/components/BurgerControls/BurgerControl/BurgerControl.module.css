@@ -26,3 +26,15 @@
     box-shadow: 0 0 0 7px #e7a881 inset;
     cursor: not-allowed;
 }
+
+@media screen and (min-width:1000px){
+    .burgerButton{
+        width: calc(5rem + 10vw);
+    }
+}
+
+@media screen and (max-width:1000px){
+    .burgerButton{
+        width: calc(5rem + 15vw);
+    }
+}

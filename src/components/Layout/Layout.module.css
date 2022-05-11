@@ -1,3 +1,10 @@
 .Content {
     margin-top: 90px;
+    padding: 5%;
+}
+
+@media (max-width: 400px){
+    .Content{
+        padding: 0%
+    }
 }

@@ -83,19 +83,19 @@ hr {
 }
 
 
-@media (min-width: 900px){
+/* @media (min-width: 900px){
     .authData{width: 40%;}
-}
+} */
 
-@media (max-width: 900px){
+/* @media (max-width: 900px){
     .authData{width: 50%;}
-}
+} */
 
 
-@media (max-width: 650px){
+/* @media (max-width: 650px){
     .authData{width: 60%;}
-}
+} */
 
-@media (max-width: 400px){
+/* @media (max-width: 400px){
     .authData{width: 100%;}
-}
+} */

@@ -18,18 +18,18 @@ const order = (props) => {
             textTransform: 'capitalize',
             display: 'inline-block',
             margin: '0 8px',
-            border: 'solid 1px',
             padding: '2px',
-            'background-color':'#fff',
-            color:'#5767df'
+            'background-color':'#5767df',
+            color:',#fff'
+
         }}
-       >{ing.name} {ing.amount}</span>
+       >{ing.name}: {ing.amount}</span>
        )
     })
 
     return(
         <div className={classes.Order}>
-            <p>Ingredients {ingOutput}</p>
+            <p>Ingredients <div className={classes.OrderIngArr}>{ingOutput}</div></p>
             <p>Price: {props.price}</p>
         </div>
 
