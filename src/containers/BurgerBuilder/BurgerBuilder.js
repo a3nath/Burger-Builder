@@ -47,10 +47,27 @@ const BurgerBuilder = props => {
     let orderSummary = null
 
     const intro =  
-        <div className={classes.Intro}>
-            <h1>Burger Builder</h1>
-            <h2 className={classes.subtitle}>Welcome to Burger Builder</h2>
-            <h3>Sign in, add topings to create your very own burger, press order to enter contact details and we will send the burger to your door!</h3>
+        <div className={classes.intro}>
+            <h1>Welcome to Burger Builder </h1>
+            <div className={classes.introText}>
+                <p className={classes.subtitle}>
+                Order your burger with <strong>unlimited toppings</strong> to your doorstep!
+                </p>
+                <ol>
+                    <li>
+                    Create your account
+                    </li>
+                    <li>
+                    Add infinite amounts of cheese (no ones watching) - actually we are because we are saving your order in a database.               
+                    </li>
+                    <li>
+                    Enter your contact details so your burger can reach you
+                    </li>
+                    <li>
+                    Voila, enjoy!!
+                    </li>
+                </ol>
+            </div>
         </div>
 
     if (props.ing){

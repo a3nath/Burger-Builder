@@ -3,8 +3,8 @@
     background-color: #5767df;
 }
 
-.Intro{
-    margin: 200px auto 100px auto;
+.intro{
+    margin: 0px auto;
     padding: 20px 0;
 }
 
@@ -16,12 +16,15 @@ h1 {
 
 .subtitle{
     text-align: center;
-    margin: 5px 0;
-    padding: 20px 0;
     font-size: 2.4rem;
+    margin: 0 auto 25px auto;
 }
 
-h3{
-    margin: 5px 0;
+.introText{
+    padding: 40px 0;
     font-size: 2rem;
+}
+
+.introText li {
+    padding: 4px 0;
 }

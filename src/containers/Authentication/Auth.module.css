@@ -5,6 +5,7 @@
     border-radius: 2px;
     box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.25);
     background-color: #fff;
+    max-width: 600px;
 }
 
 .Input {
@@ -18,7 +19,6 @@
 
 .authForm{
     padding-top: 20px;
-    padding-bottom: 20px;
     height: 400px;
     /* width: 80%; */
     color: #fff;
@@ -41,8 +41,8 @@
     color: #fff;
     padding: 10px;
     margin: 20px 0px;
-    width: 60%;
-    height: 50px;
+    width: 30%;
+    height: 60px;
 }
 
 .submitButton:hover {
@@ -54,7 +54,6 @@
 
 .inOut {
     font-size: 12px;
-    margin-top: 30px;
     padding-right: 5px;
     padding-left: 5px;
 }
@@ -82,20 +81,8 @@ hr {
     background: linear-gradient(to right, silver, black, silver)
 }
 
-
-/* @media (min-width: 900px){
-    .authData{width: 40%;}
-} */
-
-/* @media (max-width: 900px){
-    .authData{width: 50%;}
-} */
-
-
-/* @media (max-width: 650px){
-    .authData{width: 60%;}
-} */
-
-/* @media (max-width: 400px){
-    .authData{width: 100%;}
-} */
+@media screen and (max-width: 450px) {
+    .submitButton{
+        width: 50%;
+    }
+}
